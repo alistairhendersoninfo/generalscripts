@@ -1,0 +1,58 @@
+#!/bin/bash
+# lsx - minimal ls for small screens using find
+#
+# Supports options similar to `ls`:
+#   -l  show file size and name only
+#   -t  sort by modification time
+#   -r  reverse sort order
+#   -h  human readable sizes when used with -l
+# Usage: lsx [-ltrh] [path ...]
+
+list=false
+human=false
+sort_by=name
+reverse=false
+
+while getopts "ltrh" opt; do
+    case "$opt" in
+        l) list=true ;;
+        t) sort_by=time ;;
+        r) reverse=true ;;
+        h) human=true ;;
+        *) echo "Usage: lsx [-ltrh] [path...]" >&2; exit 1 ;;
+    esac
+done
+shift $((OPTIND-1))
+
+paths=("$@")
+if [ ${#paths[@]} -eq 0 ]; then
+    paths=(.)
+fi
+
+for path in "${paths[@]}"; do
+    [ ${#paths[@]} -gt 1 ] && echo "$path:"
+    entries=$(find "$path" -maxdepth 1 -mindepth 1 -printf '%T@ %s %f\n')
+    if [ "$sort_by" = "time" ]; then
+        sort_cmd="sort -n"
+    else
+        sort_cmd="sort -k3"
+    fi
+    if [ "$reverse" = true ]; then
+        sort_cmd="$sort_cmd -r"
+    fi
+    entries=$(echo "$entries" | eval $sort_cmd)
+    while IFS= read -r line; do
+        size="$(echo "$line" | awk '{print $2}')"
+        name="$(echo "$line" | cut -d' ' -f3-)"
+        if [ "$list" = true ]; then
+            if [ "$human" = true ]; then
+                size=$(numfmt --to=iec -- "$size")
+            fi
+            printf '%s %s\n' "$size" "$name"
+        else
+            printf '%s\n' "$name"
+        fi
+    done <<< "$entries"
+    [ ${#paths[@]} -gt 1 ] && echo
+done
+
