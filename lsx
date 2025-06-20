@@ -1,0 +1,25 @@
+#!/bin/bash
+# lsx - ls extended without permissions column for small screens
+# Forwards all arguments to ls. If -l is present, hides the permissions field.
+
+has_l=false
+for arg in "$@"; do
+    case "$arg" in
+        -*l*) has_l=true;;
+        --format=long) has_l=true;;
+        --long) has_l=true;;
+    esac
+done
+
+if command -v ls >/dev/null 2>&1; then
+    output=$(ls --color=auto "$@")
+else
+    echo "ls command not found" >&2
+    exit 1
+fi
+
+if $has_l; then
+    echo "$output" | awk 'NR==1 && /^total/ {print; next} {print substr($0,12)}'
+else
+    echo "$output"
+fi
