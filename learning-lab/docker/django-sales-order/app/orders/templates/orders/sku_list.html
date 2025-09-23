@@ -1,0 +1,40 @@
+{% extends "orders/base.html" %}
+{% block title %}SKUs{% endblock %}
+{% block content %}
+<div class="flex items-center justify-between mb-6">
+  <h1 class="text-2xl font-semibold">SKU Catalog</h1>
+  <a href="/skus/new/" class="bg-slate-900 text-white px-4 py-2 rounded">New SKU</a>
+</div>
+<div class="bg-white rounded shadow overflow-x-auto">
+  <table class="min-w-full divide-y divide-slate-200">
+    <thead class="bg-slate-50">
+      <tr>
+        <th class="px-4 py-2 text-left text-xs font-semibold uppercase tracking-wider">Code</th>
+        <th class="px-4 py-2 text-left text-xs font-semibold uppercase tracking-wider">Description</th>
+        <th class="px-4 py-2 text-left text-xs font-semibold uppercase tracking-wider">Unit price</th>
+        <th class="px-4 py-2 text-left text-xs font-semibold uppercase tracking-wider">Status</th>
+      </tr>
+    </thead>
+    <tbody class="bg-white divide-y divide-slate-200">
+      {% for sku in skus %}
+      <tr class="hover:bg-slate-50">
+        <td class="px-4 py-2">{{ sku.code }}</td>
+        <td class="px-4 py-2">{{ sku.description }}</td>
+        <td class="px-4 py-2">${{ sku.unit_price }}</td>
+        <td class="px-4 py-2">
+          {% if sku.is_active %}
+          <span class="px-2 py-1 rounded text-xs bg-emerald-100 text-emerald-700">Active</span>
+          {% else %}
+          <span class="px-2 py-1 rounded text-xs bg-slate-100 text-slate-600">Archived</span>
+          {% endif %}
+        </td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td class="px-4 py-6 text-center text-slate-500" colspan="4">No SKUs yet.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

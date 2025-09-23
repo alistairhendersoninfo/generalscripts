@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Chart.js GDP per capita</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.1/dist/tailwind.min.css" />
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen">
+  <div class="max-w-4xl mx-auto py-10">
+    <h1 class="text-3xl font-semibold mb-4">GDP per capita (Chart.js)</h1>
+    <canvas id="chart" height="120"></canvas>
+  </div>
+  <script>
+    async function load() {
+      const res = await fetch('/api/worldbank/gdp_per_capita?country=USA&limit=30');
+      const data = await res.json();
+      const ctx = document.getElementById('chart');
+      new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: data.series.map(point => point.period),
+          datasets: [{
+            label: data.country,
+            data: data.series.map(point => point.value),
+            borderColor: '#38bdf8',
+            backgroundColor: 'rgba(56,189,248,0.3)'
+          }]
+        },
+        options: {
+          plugins: { legend: { labels: { color: 'white' } } },
+          scales: {
+            x: { ticks: { color: '#cbd5f5' } },
+            y: { ticks: { color: '#cbd5f5' } }
+          }
+        }
+      });
+    }
+    load();
+  </script>
+</body>
+</html>

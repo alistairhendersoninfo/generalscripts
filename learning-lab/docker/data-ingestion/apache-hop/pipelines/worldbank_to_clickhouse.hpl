@@ -1,0 +1,60 @@
+{
+  "type": "PIPELINE",
+  "name": "worldbank_to_clickhouse",
+  "description": "Load World Bank CSV exports into ClickHouse",
+  "parameters": {
+    "CLICKHOUSE_JDBC_URL": "jdbc:clickhouse://clickhouse:8123/analytics",
+    "CLICKHOUSE_USER": "analytics",
+    "CLICKHOUSE_PASSWORD": "analytics",
+    "INPUT_FILE": "/files/data/worldbank/USA_NY.GDP.PCAP.CD.csv"
+  },
+  "nodes": [
+    {
+      "name": "CSV Input",
+      "type": "CsvInput",
+      "config": {
+        "filename": "${INPUT_FILE}",
+        "delimiter": ",",
+        "enclosure": "\"",
+        "header": true,
+        "fields": [
+          { "name": "Country Name" },
+          { "name": "Country Code" },
+          { "name": "Indicator Name" },
+          { "name": "Indicator Code" },
+          { "name": "1960" }
+        ]
+      }
+    },
+    {
+      "name": "Select Values",
+      "type": "SelectValues",
+      "config": {
+        "fields": [
+          { "source": "Country Code", "target": "country_code" },
+          { "source": "1960", "target": "value" }
+        ]
+      }
+    },
+    {
+      "name": "Table Output",
+      "type": "TableOutput",
+      "config": {
+        "connection": {
+          "type": "JDBC",
+          "url": "${CLICKHOUSE_JDBC_URL}",
+          "driver": "ru.yandex.clickhouse.ClickHouseDriver",
+          "username": "${CLICKHOUSE_USER}",
+          "password": "${CLICKHOUSE_PASSWORD}"
+        },
+        "schema": "analytics",
+        "table": "worldbank_gdp_per_capita",
+        "truncate": false
+      }
+    }
+  ],
+  "hops": [
+    { "from": "CSV Input", "to": "Select Values" },
+    { "from": "Select Values", "to": "Table Output" }
+  ]
+}
