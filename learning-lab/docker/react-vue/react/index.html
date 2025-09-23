@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>React Data Explorer</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.1/dist/tailwind.min.css" />
+  <style> body { background: #0f172a; color:#e2e8f0; } </style>
+</head>
+<body>
+  <div id="root" class="max-w-4xl mx-auto py-10"></div>
+  <script type="module">
+    import React, { useEffect, useState } from 'https://cdn.skypack.dev/react@18.2.0';
+    import { createRoot } from 'https://cdn.skypack.dev/react-dom@18.2.0/client';
+
+    function App() {
+      const [orders, setOrders] = useState([]);
+      useEffect(() => {
+        fetch('/api/orders/sales_totals')
+          .then(res => res.json())
+          .then(data => setOrders(data.series.slice(-15)));
+      }, []);
+      return (
+        <div>
+          <h1 className="text-3xl font-semibold mb-4">Recent order totals (React)</h1>
+          <table className="min-w-full divide-y divide-slate-700">
+            <thead>
+              <tr className="text-left">
+                <th className="py-2">Date</th>
+                <th className="py-2">Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              {orders.map(row => (
+                <tr key={row.day} className="odd:bg-slate-900">
+                  <td className="py-2 pr-4">{row.day}</td>
+                  <td className="py-2">${row.total.toFixed(2)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      );
+    }
+
+    createRoot(document.getElementById('root')).render(<App />);
+  </script>
+</body>
+</html>

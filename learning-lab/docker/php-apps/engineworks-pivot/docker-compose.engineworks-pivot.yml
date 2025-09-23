@@ -1,0 +1,11 @@
+services:
+  engineworks-pivot:
+    build: .
+    ports:
+      - 8124:80
+    networks: [lab]
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_docker_core_lab

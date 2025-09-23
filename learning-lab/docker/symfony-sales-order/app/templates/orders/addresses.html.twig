@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+{% block title %}Delivery addresses{% endblock %}
+{% block body %}
+<div class="flex items-center justify-between mb-6">
+  <h1 class="text-2xl font-semibold">Delivery addresses</h1>
+  <a href="{{ path('symfony_address_new') }}" class="bg-slate-900 text-white px-4 py-2 rounded">New address</a>
+</div>
+<div class="bg-white rounded shadow overflow-x-auto">
+  <table class="min-w-full divide-y divide-slate-200">
+    <thead class="bg-slate-50">
+      <tr>
+        <th class="px-4 py-2 text-left text-xs font-semibold uppercase tracking-wider">Customer</th>
+        <th class="px-4 py-2 text-left text-xs font-semibold uppercase tracking-wider">Label</th>
+        <th class="px-4 py-2 text-left text-xs font-semibold uppercase tracking-wider">Address</th>
+      </tr>
+    </thead>
+    <tbody class="bg-white divide-y divide-slate-200">
+      {% for address in addresses %}
+      <tr class="hover:bg-slate-50">
+        <td class="px-4 py-2">{{ address.customer.name }}</td>
+        <td class="px-4 py-2">{{ address.label }}</td>
+        <td class="px-4 py-2">
+          {{ address.line1 }}{% if address.line2 %}, {{ address.line2 }}{% endif %},
+          {{ address.city }}, {{ address.state }} {{ address.postalCode }}
+        </td>
+      </tr>
+      {% else %}
+      <tr>
+        <td class="px-4 py-6 text-center text-slate-500" colspan="3">No addresses yet.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

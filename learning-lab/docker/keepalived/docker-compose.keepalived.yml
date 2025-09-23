@@ -1,0 +1,42 @@
+services:
+  mysql-primary:
+    image: mysql:8.3
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: sales
+    volumes:
+      - mysql-primary-data:/var/lib/mysql
+    networks: [ha]
+
+  mysql-replica:
+    image: mysql:8.3
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: sales
+    volumes:
+      - mysql-replica-data:/var/lib/mysql
+    networks: [ha]
+
+  keepalived-primary:
+    image: osixia/keepalived:2.0.20
+    network_mode: "host"
+    cap_add:
+      - NET_ADMIN
+    volumes:
+      - ./config/keepalived-primary.conf:/container/service/keepalived/assets/keepalived.conf:ro
+
+  keepalived-backup:
+    image: osixia/keepalived:2.0.20
+    network_mode: "host"
+    cap_add:
+      - NET_ADMIN
+    volumes:
+      - ./config/keepalived-backup.conf:/container/service/keepalived/assets/keepalived.conf:ro
+
+networks:
+  ha:
+    driver: bridge
+
+volumes:
+  mysql-primary-data:
+  mysql-replica-data:

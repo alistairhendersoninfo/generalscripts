@@ -1,0 +1,18 @@
+{% extends "orders/base.html" %}
+{% block title %}New Customer{% endblock %}
+{% block content %}
+<h1 class="text-2xl font-semibold mb-6">Add customer</h1>
+<form method="post" class="bg-white rounded shadow p-6 space-y-4">
+  {% csrf_token %}
+  {% for field in form %}
+  <div>
+    <label class="block text-sm font-medium text-slate-700">{{ field.label }}</label>
+    {{ field }}
+    {% if field.errors %}
+    <p class="text-sm text-red-600">{{ field.errors|join:', ' }}</p>
+    {% endif %}
+  </div>
+  {% endfor %}
+  <button type="submit" class="bg-slate-900 text-white px-4 py-2 rounded">Save</button>
+</form>
+{% endblock %}
