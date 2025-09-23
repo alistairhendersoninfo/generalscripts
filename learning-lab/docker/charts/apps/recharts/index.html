@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Recharts GDP</title>
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script crossorigin src="https://unpkg.com/recharts/umd/Recharts.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.1/dist/tailwind.min.css" />
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen">
+  <div id="root" class="max-w-4xl mx-auto py-10"></div>
+  <script type="text/babel">
+    const { useEffect, useState } = React;
+    const { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, ResponsiveContainer } = Recharts;
+
+    function App() {
+      const [data, setData] = useState([]);
+      useEffect(() => {
+        fetch('/api/worldbank/gdp_per_capita?country=USA&limit=30')
+          .then(res => res.json())
+          .then(payload => setData(payload.series.map(p => ({ period: p.period, value: p.value }))));
+      }, []);
+      return (
+        <div>
+          <h1 className="text-3xl font-semibold mb-4">GDP per capita (Recharts)</h1>
+          <div style={{ width: '100%', height: 360 }}>
+            <ResponsiveContainer>
+              <LineChart data={data}>
+                <CartesianGrid stroke="#1e293b" />
+                <XAxis dataKey="period" stroke="#cbd5f5" tick={{ fill: '#cbd5f5' }} angle={-45} textAnchor="end" height={80} />
+                <YAxis stroke="#cbd5f5" tick={{ fill: '#cbd5f5' }} />
+                <Tooltip contentStyle={{ backgroundColor: '#1e293b', borderColor: '#38bdf8', color: '#e2e8f0' }} />
+                <Line type="monotone" dataKey="value" stroke="#38bdf8" dot={false} strokeWidth={2} />
+              </LineChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+  </script>
+</body>
+</html>
