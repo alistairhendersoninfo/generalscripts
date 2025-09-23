@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Dygraphs GDP</title>
+  <script src="https://cdn.jsdelivr.net/npm/dygraphs@2.2.1/dist/dygraph.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/dygraphs@2.2.1/dist/dygraph.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.1/dist/tailwind.min.css" />
+  <style> body { background:#0f172a; color:#e2e8f0; } </style>
+</head>
+<body>
+  <div class="max-w-4xl mx-auto py-10">
+    <h1 class="text-3xl font-semibold mb-4">GDP per capita (Dygraphs)</h1>
+    <div id="chart" style="width:100%; height:360px"></div>
+  </div>
+  <script>
+    async function load() {
+      const res = await fetch('/api/worldbank/gdp_per_capita?country=USA&limit=30');
+      const data = await res.json();
+      const csv = 'Date,GDP\n' + data.series.map(p => `${p.period},${p.value}`).join('\n');
+      new Dygraph(document.getElementById('chart'), csv, {
+        labelsUTC: true,
+        legend: 'always',
+        colors: ['#38bdf8'],
+        axes: { x: { axisLabelFormatter: x => new Date(x).getUTCFullYear() } }
+      });
+    }
+    load();
+  </script>
+</body>
+</html>

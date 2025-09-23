@@ -1,0 +1,51 @@
+version: "3.9"
+
+services:
+  immich-server:
+    image: ghcr.io/immich-app/immich-server:release
+    restart: unless-stopped
+    environment:
+      - DB_HOSTNAME=immich-db
+      - DB_USERNAME=immich
+      - DB_PASSWORD=immich
+      - DB_DATABASE_NAME=immich
+      - REDIS_HOSTNAME=immich-redis
+      - IMMICH_TELEMETRY_DISABLED=true
+    ports:
+      - "2283:2283"
+    depends_on:
+      - immich-db
+      - immich-redis
+    volumes:
+      - immich-uploads:/usr/src/app/upload
+
+  immich-machine-learning:
+    image: ghcr.io/immich-app/immich-machine-learning:release
+    restart: unless-stopped
+    environment:
+      - IMMICH_TELEMETRY_DISABLED=true
+    volumes:
+      - immich-ml:/cache
+
+  immich-db:
+    image: postgres:15-alpine
+    restart: unless-stopped
+    environment:
+      - POSTGRES_DB=immich
+      - POSTGRES_USER=immich
+      - POSTGRES_PASSWORD=immich
+    volumes:
+      - immich-db:/var/lib/postgresql/data
+
+  immich-redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    command: redis-server --appendonly yes
+    volumes:
+      - immich-redis:/data
+
+volumes:
+  immich-uploads:
+  immich-ml:
+  immich-db:
+  immich-redis:

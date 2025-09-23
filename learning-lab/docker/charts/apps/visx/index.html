@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Visx GDP</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.1/dist/tailwind.min.css" />
+  <style> body { background: #0f172a; color: #e2e8f0; } </style>
+</head>
+<body>
+  <div class="max-w-4xl mx-auto py-10">
+    <h1 class="text-3xl font-semibold mb-4">GDP per capita (Visx)</h1>
+    <div id="root" style="height:360px"></div>
+  </div>
+  <script type="module">
+    import React, { useEffect, useMemo, useState } from 'https://cdn.skypack.dev/react@18.2.0';
+    import { createRoot } from 'https://cdn.skypack.dev/react-dom@18.2.0/client';
+    import { XYChart, AnimatedLineSeries, Tooltip, AnimatedAxis, Grid } from 'https://cdn.skypack.dev/@visx/xychart@3.5.0';
+
+    function App() {
+      const [points, setPoints] = useState([]);
+      useEffect(() => {
+        fetch('/api/worldbank/gdp_per_capita?country=USA&limit=30')
+          .then(res => res.json())
+          .then(data => setPoints(data.series.map(p => ({ x: p.period, y: p.value }))));
+      }, []);
+      const accessors = useMemo(() => ({ xAccessor: d => d.x, yAccessor: d => d.y }), []);
+      if (!points.length) return <div>Loading…</div>;
+      return (
+        <XYChart height={320} xScale={{ type: 'band' }} yScale={{ type: 'linear' }}>
+          <Grid columns={false} numTicks={4} />
+          <AnimatedAxis orientation="bottom" numTicks={6} hideTicks={false} label="Year" />
+          <AnimatedAxis orientation="left" label="USD" />
+          <AnimatedLineSeries dataKey="GDP" data={points} {...accessors} stroke="#38bdf8" />
+          <Tooltip
+            showHorizontalCrosshair
+            renderTooltip={({ tooltipData }) => (
+              <div style={{ color: '#38bdf8' }}>
+                <div>{tooltipData.nearestDatum.datum.x}</div>
+                <div>${tooltipData.nearestDatum.datum.y.toLocaleString()}</div>
+              </div>
+            )}
+          />
+        </XYChart>
+      );
+    }
+
+    createRoot(document.getElementById('root')).render(<App />);
+  </script>
+</body>
+</html>

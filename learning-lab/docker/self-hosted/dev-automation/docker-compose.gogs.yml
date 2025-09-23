@@ -1,0 +1,34 @@
+version: "3.9"
+
+services:
+  gogs:
+    image: gogs/gogs:0.13
+    restart: unless-stopped
+    ports:
+      - "3001:3000"
+      - "2222:22"
+    environment:
+      - DB_TYPE=postgres
+      - DB_HOST=gogs-db:5432
+      - DB_NAME=gogs
+      - DB_USER=gogs
+      - DB_PASSWD=gogs
+      - RUN_MODE=prod
+    volumes:
+      - gogs-data:/data
+    depends_on:
+      - gogs-db
+
+  gogs-db:
+    image: postgres:15-alpine
+    restart: unless-stopped
+    environment:
+      - POSTGRES_DB=gogs
+      - POSTGRES_USER=gogs
+      - POSTGRES_PASSWORD=gogs
+    volumes:
+      - gogs-db:/var/lib/postgresql/data
+
+volumes:
+  gogs-data:
+  gogs-db:

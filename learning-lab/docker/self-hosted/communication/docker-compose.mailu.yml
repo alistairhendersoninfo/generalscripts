@@ -1,0 +1,93 @@
+version: "3.9"
+
+services:
+  redis-mailu:
+    image: redis:7-alpine
+    restart: unless-stopped
+    volumes:
+      - mailu-redis:/data
+
+  postgres-mailu:
+    image: postgres:15-alpine
+    restart: unless-stopped
+    environment:
+      - POSTGRES_USER=mailu
+      - POSTGRES_PASSWORD=mailu
+      - POSTGRES_DB=mailu
+    volumes:
+      - mailu-postgres:/var/lib/postgresql/data
+
+  front:
+    image: mailu/nginx:2.0
+    restart: unless-stopped
+    env_file:
+      - ./mailu/.env
+    depends_on:
+      - admin
+      - imap
+      - smtp
+    ports:
+      - "25:25"
+      - "110:110"
+      - "143:143"
+      - "465:465"
+      - "587:587"
+      - "993:993"
+      - "995:995"
+      - "8089:80"
+      - "8449:443"
+    volumes:
+      - mailu-cert:/certs
+      - mailu-overrides:/overrides
+
+  admin:
+    image: mailu/admin:2.0
+    restart: unless-stopped
+    env_file:
+      - ./mailu/.env
+    depends_on:
+      - redis-mailu
+      - postgres-mailu
+    volumes:
+      - mailu-data:/data
+
+  imap:
+    image: mailu/dovecot:2.0
+    restart: unless-stopped
+    env_file:
+      - ./mailu/.env
+    depends_on:
+      - admin
+      - redis-mailu
+    volumes:
+      - mailu-mail:/mail
+
+  smtp:
+    image: mailu/postfix:2.0
+    restart: unless-stopped
+    env_file:
+      - ./mailu/.env
+    depends_on:
+      - admin
+      - redis-mailu
+    volumes:
+      - mailu-mail:/mail
+
+  antispam:
+    image: mailu/rspamd:2.0
+    restart: unless-stopped
+    env_file:
+      - ./mailu/.env
+    depends_on:
+      - redis-mailu
+    volumes:
+      - mailu-filter:/var/lib/rspamd
+
+volumes:
+  mailu-redis:
+  mailu-postgres:
+  mailu-cert:
+  mailu-overrides:
+  mailu-data:
+  mailu-mail:
+  mailu-filter:

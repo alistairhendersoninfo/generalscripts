@@ -1,0 +1,26 @@
+version: "3.9"
+
+services:
+  onlyoffice-docs:
+    image: onlyoffice/documentserver:8.0
+    restart: unless-stopped
+    ports:
+      - "8443:443"
+    environment:
+      - JWT_ENABLED=true
+      - JWT_SECRET=changemejwt
+      - JWT_HEADER=AuthorizationJwt
+      - JWT_IN_BODY=true
+      - LETS_ENCRYPT_DOMAIN=
+      - LETS_ENCRYPT_MAIL=
+    volumes:
+      - onlyoffice-data:/var/www/onlyoffice/Data
+      - onlyoffice-logs:/var/log/onlyoffice
+      - onlyoffice-lib:/var/lib/onlyoffice
+      - onlyoffice-db:/var/lib/postgresql
+
+volumes:
+  onlyoffice-data:
+  onlyoffice-logs:
+  onlyoffice-lib:
+  onlyoffice-db:

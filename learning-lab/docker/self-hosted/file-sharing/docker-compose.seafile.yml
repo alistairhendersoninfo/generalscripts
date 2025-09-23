@@ -1,0 +1,38 @@
+version: "3.9"
+
+services:
+  seafile:
+    image: seafileltd/seafile-mc:11.0.3
+    restart: unless-stopped
+    environment:
+      - DB_HOST=seafile-db
+      - DB_ROOT_PASSWD=seafile
+      - SEAFILE_ADMIN_EMAIL=admin@localhost
+      - SEAFILE_ADMIN_PASSWORD=Admin123!
+      - TIME_ZONE=UTC
+    ports:
+      - "8090:80"
+    depends_on:
+      - seafile-db
+      - seafile-memcached
+    volumes:
+      - seafile-data:/shared
+
+  seafile-db:
+    image: mariadb:10.6
+    restart: unless-stopped
+    environment:
+      - MYSQL_ROOT_PASSWORD=seafile
+      - MYSQL_DATABASE=seafile
+      - MYSQL_USER=seafile
+      - MYSQL_PASSWORD=seafile
+    volumes:
+      - seafile-db:/var/lib/mysql
+
+  seafile-memcached:
+    image: memcached:1.6-alpine
+    restart: unless-stopped
+
+volumes:
+  seafile-data:
+  seafile-db:

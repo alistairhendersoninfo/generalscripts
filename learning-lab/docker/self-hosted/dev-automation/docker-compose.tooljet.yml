@@ -1,0 +1,43 @@
+version: "3.9"
+
+services:
+  tooljet:
+    image: tooljet/tooljet:2.26.0
+    restart: unless-stopped
+    environment:
+      - TOOLJET_HOST=http://localhost:80821
+      - TOOLJET_DB_HOST=tooljet-db
+      - TOOLJET_DB_USER=tooljet
+      - TOOLJET_DB_PASS=tooljet
+      - TOOLJET_DB_NAME=tooljet
+      - TOOLJET_REDIS_HOST=tooljet-redis
+      - TOOLJET_ENCRYPTION_KEY=tooljetsecrettooljetsecret
+    ports:
+      - "80821:3000"
+    depends_on:
+      - tooljet-db
+      - tooljet-redis
+    volumes:
+      - tooljet-data:/var/lib/tooljet
+
+  tooljet-db:
+    image: postgres:15-alpine
+    restart: unless-stopped
+    environment:
+      - POSTGRES_DB=tooljet
+      - POSTGRES_USER=tooljet
+      - POSTGRES_PASSWORD=tooljet
+    volumes:
+      - tooljet-db:/var/lib/postgresql/data
+
+  tooljet-redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    command: redis-server --appendonly yes
+    volumes:
+      - tooljet-redis:/data
+
+volumes:
+  tooljet-data:
+  tooljet-db:
+  tooljet-redis:

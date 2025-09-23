@@ -1,0 +1,11 @@
+services:
+  php-crud-api:
+    build: .
+    ports:
+      - 8123:80
+    networks: [lab]
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_docker_core_lab

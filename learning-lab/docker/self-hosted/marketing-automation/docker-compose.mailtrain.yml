@@ -1,0 +1,45 @@
+version: "3.9"
+
+services:
+  mailtrain:
+    image: mailtrain/mailtrain:v2
+    restart: unless-stopped
+    depends_on:
+      - mailtrain-db
+      - mailtrain-redis
+    environment:
+      - MYSQL_HOST=mailtrain-db
+      - MYSQL_USER=mailtrain
+      - MYSQL_PASSWORD=mailtrain
+      - MYSQL_DATABASE=mailtrain
+      - REDIS_HOST=mailtrain-redis
+      - DEFAULT_ADMIN_USER=admin
+      - DEFAULT_ADMIN_PASSWORD=Admin123!
+      - WWW_URL=http://localhost:80814
+    ports:
+      - "80814:3000"
+    volumes:
+      - mailtrain-data:/app/server/files
+
+  mailtrain-db:
+    image: mariadb:10.6
+    restart: unless-stopped
+    environment:
+      - MYSQL_ROOT_PASSWORD=mailtrain
+      - MYSQL_DATABASE=mailtrain
+      - MYSQL_USER=mailtrain
+      - MYSQL_PASSWORD=mailtrain
+    volumes:
+      - mailtrain-db:/var/lib/mysql
+
+  mailtrain-redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    command: redis-server --appendonly yes
+    volumes:
+      - mailtrain-redis:/data
+
+volumes:
+  mailtrain-data:
+  mailtrain-db:
+  mailtrain-redis:

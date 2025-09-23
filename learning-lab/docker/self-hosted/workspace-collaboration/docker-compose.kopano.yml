@@ -1,0 +1,45 @@
+version: "3.9"
+
+services:
+  kopano-db:
+    image: mariadb:10.6
+    restart: unless-stopped
+    environment:
+      - MYSQL_ROOT_PASSWORD=kopano
+      - MYSQL_DATABASE=kopano
+      - MYSQL_USER=kopano
+      - MYSQL_PASSWORD=kopano
+    volumes:
+      - kopano-db:/var/lib/mysql
+
+  kopano-server:
+    image: kopano/kopano_core:latest
+    restart: unless-stopped
+    depends_on:
+      - kopano-db
+    environment:
+      - MYSQL_SERVER=kopano-db
+      - MYSQL_DATABASE=kopano
+      - MYSQL_USER=kopano
+      - MYSQL_PASSWORD=kopano
+      - SERVICE_TO_START=server
+    volumes:
+      - kopano-core:/kopano
+
+  kopano-webapp:
+    image: kopano/kopano_webapp:latest
+    restart: unless-stopped
+    depends_on:
+      - kopano-server
+    environment:
+      - KCCONF_SERVER_DEFAULT_=https://kopano-server:237/kopano
+      - KCCONF_PLUGINS_DEFAULT_=files
+    ports:
+      - "9443:443"
+    volumes:
+      - kopano-webapp:/kopano/webapp
+
+volumes:
+  kopano-db:
+  kopano-core:
+  kopano-webapp:

@@ -1,0 +1,36 @@
+version: "3.9"
+
+services:
+  egroupware:
+    image: egroupware/egroupware:23.1
+    restart: unless-stopped
+    ports:
+      - "8084:443"
+    environment:
+      - EGROUPWARE_SITE_NAME=egroupware
+      - EGROUPWARE_DB_HOST=egroupware-db
+      - EGROUPWARE_DB_NAME=egroupware
+      - EGROUPWARE_DB_USER=egroupware
+      - EGROUPWARE_DB_PASS=egroupware
+      - EGROUPWARE_ADMIN_PASS=Admin123!
+    depends_on:
+      - egroupware-db
+    volumes:
+      - egroupware-files:/var/lib/egroupware
+      - egroupware-backups:/var/lib/backup
+
+  egroupware-db:
+    image: mariadb:10.6
+    restart: unless-stopped
+    environment:
+      - MYSQL_ROOT_PASSWORD=egroupware
+      - MYSQL_DATABASE=egroupware
+      - MYSQL_USER=egroupware
+      - MYSQL_PASSWORD=egroupware
+    volumes:
+      - egroupware-db:/var/lib/mysql
+
+volumes:
+  egroupware-files:
+  egroupware-backups:
+  egroupware-db:

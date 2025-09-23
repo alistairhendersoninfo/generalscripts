@@ -1,0 +1,72 @@
+services:
+  backend:
+    build: ./backend
+    image: learning-lab/charts-backend:latest
+    environment:
+      CLICKHOUSE_HOST: clickhouse
+      CLICKHOUSE_PORT: 9000
+      CLICKHOUSE_USER: analytics
+      CLICKHOUSE_PASSWORD: analytics
+      CLICKHOUSE_DATABASE: analytics
+    networks:
+      - lab
+
+  chartjs-app:
+    build: ./apps/chartjs
+    networks: [lab]
+    depends_on: [backend]
+
+  d3-app:
+    build: ./apps/d3
+    networks: [lab]
+    depends_on: [backend]
+
+  apexcharts-app:
+    build: ./apps/apexcharts
+    networks: [lab]
+    depends_on: [backend]
+
+  echarts-app:
+    build: ./apps/echarts
+    networks: [lab]
+    depends_on: [backend]
+
+  plotly-app:
+    build: ./apps/plotly
+    networks: [lab]
+    depends_on: [backend]
+
+  recharts-app:
+    build: ./apps/recharts
+    networks: [lab]
+    depends_on: [backend]
+
+  nivo-app:
+    build: ./apps/nivo
+    networks: [lab]
+    depends_on: [backend]
+
+  visx-app:
+    build: ./apps/visx
+    networks: [lab]
+    depends_on: [backend]
+
+  dygraphs-app:
+    build: ./apps/dygraphs
+    networks: [lab]
+    depends_on: [backend]
+
+  googlecharts-app:
+    build: ./apps/googlecharts
+    networks: [lab]
+    depends_on: [backend]
+
+  chartist-app:
+    build: ./apps/chartist
+    networks: [lab]
+    depends_on: [backend]
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_docker_core_lab

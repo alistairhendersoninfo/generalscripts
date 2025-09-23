@@ -1,0 +1,58 @@
+version: "3.9"
+
+services:
+  zulip:
+    image: zulip/docker-zulip:8.1
+    restart: unless-stopped
+    hostname: zulip
+    depends_on:
+      - zulip-postgres
+      - zulip-redis
+      - zulip-memcached
+      - zulip-rabbitmq
+    ports:
+      - "8444:443"
+    environment:
+      - SETTING_EXTERNAL_HOST=zulip.localhost
+      - SETTING_ZULIP_ADMINISTRATOR=admin@zulip.localhost
+      - SECRETS_email_password=changeme
+      - SECRETS_secret_key=supersecretkey
+      - ZULIP_AUTH_BACKENDS=EmailAuthBackend
+    volumes:
+      - zulip-data:/data
+
+  zulip-postgres:
+    image: postgres:15
+    restart: unless-stopped
+    environment:
+      - POSTGRES_USER=zulip
+      - POSTGRES_PASSWORD=zulip
+      - POSTGRES_DB=zulip
+    volumes:
+      - zulip-postgres:/var/lib/postgresql/data
+
+  zulip-redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    command: redis-server --appendonly yes
+    volumes:
+      - zulip-redis:/data
+
+  zulip-memcached:
+    image: memcached:1.6-alpine
+    restart: unless-stopped
+
+  zulip-rabbitmq:
+    image: rabbitmq:3-management
+    restart: unless-stopped
+    environment:
+      - RABBITMQ_DEFAULT_USER=zulip
+      - RABBITMQ_DEFAULT_PASS=zulip
+    volumes:
+      - zulip-rabbitmq:/var/lib/rabbitmq
+
+volumes:
+  zulip-data:
+  zulip-postgres:
+  zulip-redis:
+  zulip-rabbitmq:

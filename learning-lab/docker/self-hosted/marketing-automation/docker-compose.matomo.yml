@@ -1,0 +1,32 @@
+version: "3.9"
+
+services:
+  matomo:
+    image: matomo:4-apache
+    restart: unless-stopped
+    depends_on:
+      - matomo-db
+    ports:
+      - "80811:80"
+    environment:
+      - MATOMO_DATABASE_HOST=matomo-db
+      - MATOMO_DATABASE_USERNAME=matomo
+      - MATOMO_DATABASE_PASSWORD=matomo
+      - MATOMO_DATABASE_DBNAME=matomo
+    volumes:
+      - matomo-html:/var/www/html
+
+  matomo-db:
+    image: mariadb:10.6
+    restart: unless-stopped
+    environment:
+      - MYSQL_ROOT_PASSWORD=matomo
+      - MYSQL_DATABASE=matomo
+      - MYSQL_USER=matomo
+      - MYSQL_PASSWORD=matomo
+    volumes:
+      - matomo-db:/var/lib/mysql
+
+volumes:
+  matomo-html:
+  matomo-db:

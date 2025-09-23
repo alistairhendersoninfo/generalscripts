@@ -1,0 +1,16 @@
+version: "3.9"
+
+services:
+  appsmith:
+    image: appsmith/appsmith-ce:1.21.0
+    restart: unless-stopped
+    ports:
+      - "80820:80"
+    environment:
+      - APPSMITH_ENCRYPTION_PASSWORD=changemechangeme
+      - APPSMITH_ENCRYPTION_SALT=changemechangeme
+    volumes:
+      - appsmith-stacks:/appsmith-stacks
+
+volumes:
+  appsmith-stacks:

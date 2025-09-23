@@ -1,0 +1,62 @@
+version: "3.9"
+
+services:
+  mastodon-web:
+    image: tootsuite/mastodon:v4.2.8
+    restart: unless-stopped
+    env_file:
+      - ./mastodon/.env.production
+    command: bundle exec rails s -p 3000 -b 0.0.0.0
+    depends_on:
+      - mastodon-db
+      - mastodon-redis
+    ports:
+      - "80827:3000"
+    volumes:
+      - mastodon-public:/mastodon/public/system
+
+  mastodon-streaming:
+    image: tootsuite/mastodon:v4.2.8
+    restart: unless-stopped
+    env_file:
+      - ./mastodon/.env.production
+    command: node ./streaming
+    depends_on:
+      - mastodon-db
+      - mastodon-redis
+    ports:
+      - "4000:4000"
+
+  mastodon-sidekiq:
+    image: tootsuite/mastodon:v4.2.8
+    restart: unless-stopped
+    env_file:
+      - ./mastodon/.env.production
+    command: bundle exec sidekiq
+    depends_on:
+      - mastodon-db
+      - mastodon-redis
+    volumes:
+      - mastodon-public:/mastodon/public/system
+
+  mastodon-db:
+    image: postgres:15-alpine
+    restart: unless-stopped
+    environment:
+      - POSTGRES_DB=mastodon
+      - POSTGRES_USER=mastodon
+      - POSTGRES_PASSWORD=mastodon
+    volumes:
+      - mastodon-db:/var/lib/postgresql/data
+
+  mastodon-redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    command: redis-server --appendonly yes
+    volumes:
+      - mastodon-redis:/data
+
+volumes:
+  mastodon-public:
+  mastodon-db:
+  mastodon-redis:

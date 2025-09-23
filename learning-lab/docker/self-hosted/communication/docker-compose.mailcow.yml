@@ -1,0 +1,111 @@
+version: "3.9"
+
+services:
+  redis-mailcow:
+    image: mailcow/redis:1.17
+    restart: unless-stopped
+    env_file:
+      - ./mailcow/.env
+    command: ["/bin/sh", "-c", "redis-server --requirepass $$REDIS_PASS"]
+    volumes:
+      - mailcow-redis:/data
+
+  mysql-mailcow:
+    image: mariadb:10.6
+    restart: unless-stopped
+    env_file:
+      - ./mailcow/.env
+    environment:
+      - MYSQL_DATABASE=${DBNAME}
+      - MYSQL_USER=${DBUSER}
+      - MYSQL_PASSWORD=${DBPASS}
+      - MYSQL_ROOT_PASSWORD=${DBROOT}
+    volumes:
+      - mailcow-mysql:/var/lib/mysql
+
+  rspamd-mailcow:
+    image: mailcow/rspamd:1.17
+    restart: unless-stopped
+    env_file:
+      - ./mailcow/.env
+    depends_on:
+      - redis-mailcow
+      - mysql-mailcow
+    volumes:
+      - mailcow-rspamd:/var/lib/rspamd
+
+  postfix-mailcow:
+    image: mailcow/postfix:1.17
+    restart: unless-stopped
+    env_file:
+      - ./mailcow/.env
+    depends_on:
+      - mysql-mailcow
+      - redis-mailcow
+      - rspamd-mailcow
+    ports:
+      - "25:25"
+      - "465:465"
+      - "587:587"
+    volumes:
+      - mailcow-postfix:/var/spool/postfix
+
+  dovecot-mailcow:
+    image: mailcow/dovecot:1.17
+    restart: unless-stopped
+    env_file:
+      - ./mailcow/.env
+    depends_on:
+      - mysql-mailcow
+    ports:
+      - "993:993"
+      - "995:995"
+    volumes:
+      - mailcow-dovecot:/var/vmail
+
+  sogo-mailcow:
+    image: mailcow/sogo:1.17
+    restart: unless-stopped
+    env_file:
+      - ./mailcow/.env
+    depends_on:
+      - mysql-mailcow
+      - redis-mailcow
+    ports:
+      - "20001:20000"
+    volumes:
+      - mailcow-sogo:/var/lib/sogo
+
+  php-fpm-mailcow:
+    image: mailcow/phpfpm:1.17
+    restart: unless-stopped
+    env_file:
+      - ./mailcow/.env
+    depends_on:
+      - mysql-mailcow
+      - redis-mailcow
+    volumes:
+      - mailcow-php:/usr/local/etc/php
+
+  nginx-mailcow:
+    image: mailcow/nginx:1.17
+    restart: unless-stopped
+    env_file:
+      - ./mailcow/.env
+    depends_on:
+      - php-fpm-mailcow
+    ports:
+      - "8088:80"
+      - "8448:443"
+    volumes:
+      - mailcow-acme:/etc/ssl/mail
+
+volumes:
+  mailcow-redis:
+  mailcow-mysql:
+  mailcow-rspamd:
+  mailcow-postfix:
+  mailcow-dovecot:
+  mailcow-sogo:
+  mailcow-php:
+  mailcow-acme:
