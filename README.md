@@ -4,6 +4,14 @@ Collection of small utilities and examples. This repository now also contains
 `pdf_to_text`, a simple Python wrapper around the `poppler-utils` commands such
 as `pdftotext`.
 
+## specification-kit
+
+`specification-kit` is a scaffold for starting a documentation repository
+focused on technical specifications. It includes a README-driven overview along
+with placeholder directories for templates, examples, guides, and tooling so
+teams can jumpstart a consistent spec workflow. See
+[`specification-kit/README.md`](specification-kit/README.md) for details.
+
 See `pdf_to_text/README.md` for details.
 
 ## lsx
