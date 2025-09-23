@@ -1,0 +1,4 @@
+image: bitnami/suitecrm:8.6.2
+service:
+  port: 8093
+resources: {}

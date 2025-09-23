@@ -1,0 +1,4 @@
+image: grafana/grafana:10.4.1
+service:
+  port: 3000
+resources: {}

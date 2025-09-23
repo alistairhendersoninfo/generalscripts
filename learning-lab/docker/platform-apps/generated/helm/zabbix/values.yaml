@@ -1,0 +1,4 @@
+image: zabbix/zabbix-server-pgsql:7.0-ubuntu
+service:
+  port: 10051
+resources: {}

@@ -1,0 +1,17 @@
+# Notes: Connect HASURA_GRAPHQL_DATABASE_URL to Postgres and set an admin secret.
+services:
+  hasura-graphql-engine:
+    image: hasura/graphql-engine:v2.40.0
+    container_name: hasura-graphql-engine
+    restart: unless-stopped
+    ports:
+      - "8088:8088"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

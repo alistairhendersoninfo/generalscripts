@@ -1,0 +1,4 @@
+image: airsonicadvanced/airsonic-advanced:11.0.0
+service:
+  port: 4040
+resources: {}

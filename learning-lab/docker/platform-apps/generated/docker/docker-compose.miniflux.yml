@@ -1,0 +1,17 @@
+# Notes: Requires Postgres database.
+services:
+  miniflux:
+    image: miniflux/miniflux:2.0.49
+    container_name: miniflux
+    restart: unless-stopped
+    ports:
+      - "8087:8087"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

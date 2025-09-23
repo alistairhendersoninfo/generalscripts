@@ -1,0 +1,17 @@
+# Notes: Compose demo should include the Supabase meta services (studio, gotrue, realtime).
+services:
+  supabase:
+    image: supabase/postgres:15.1.0.68
+    container_name: supabase
+    restart: unless-stopped
+    ports:
+      - "5433:5433"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

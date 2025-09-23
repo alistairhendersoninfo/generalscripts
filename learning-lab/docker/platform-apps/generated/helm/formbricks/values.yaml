@@ -1,0 +1,4 @@
+image: ghcr.io/formbricks/formbricks:1.6.0
+service:
+  port: 3002
+resources: {}

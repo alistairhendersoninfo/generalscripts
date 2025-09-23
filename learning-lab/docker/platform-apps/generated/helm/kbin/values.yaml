@@ -1,0 +1,4 @@
+image: ernado/kbin:0.11.1
+service:
+  port: 8104
+resources: {}

@@ -1,0 +1,4 @@
+image: aditosoftware/reportserver:4.8
+service:
+  port: 8083
+resources: {}

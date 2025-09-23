@@ -1,0 +1,17 @@
+# Notes: Needs Postgres and Redis plus optional worker service.
+services:
+  kbin:
+    image: ernado/kbin:0.11.1
+    container_name: kbin
+    restart: unless-stopped
+    ports:
+      - "8104:8104"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

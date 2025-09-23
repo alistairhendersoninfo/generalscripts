@@ -1,0 +1,4 @@
+image: netdata/netdata:stable
+service:
+  port: 19999
+resources: {}

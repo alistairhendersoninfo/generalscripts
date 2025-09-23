@@ -1,0 +1,4 @@
+image: lycheeorg/lychee:latest
+service:
+  port: 3012
+resources: {}

@@ -1,0 +1,4 @@
+image: eikek0/docspell-restserver:23.3.0
+service:
+  port: 7880
+resources: {}

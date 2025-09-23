@@ -1,0 +1,41 @@
+version: "3.9"
+
+services:
+  plausible:
+    image: plausible/analytics:1.5.3
+    restart: unless-stopped
+    depends_on:
+      - plausible-db
+      - plausible-events-db
+    environment:
+      - BASE_URL=http://localhost:80817
+      - SECRET_KEY_BASE=changeme
+      - DATABASE_URL=postgres://plausible:plausible@plausible-db:5432/plausible
+      - CLICKHOUSE_DATABASE_URL=http://plausible-events-db:8123/plausible_events_db
+      - MAILER_EMAIL=hello@localhost
+      - MAILER_NAME=Plausible
+    ports:
+      - "80817:8000"
+    volumes:
+      - plausible-config:/plausible/config
+
+  plausible-db:
+    image: postgres:15-alpine
+    restart: unless-stopped
+    environment:
+      - POSTGRES_DB=plausible
+      - POSTGRES_USER=plausible
+      - POSTGRES_PASSWORD=plausible
+    volumes:
+      - plausible-db:/var/lib/postgresql/data
+
+  plausible-events-db:
+    image: clickhouse/clickhouse-server:23.8
+    restart: unless-stopped
+    volumes:
+      - plausible-events:/var/lib/clickhouse
+
+volumes:
+  plausible-config:
+  plausible-db:
+  plausible-events:

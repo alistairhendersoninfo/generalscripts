@@ -1,0 +1,41 @@
+version: "3.9"
+
+services:
+  openproject:
+    image: openproject/community:13
+    restart: unless-stopped
+    depends_on:
+      - openproject-db
+      - openproject-cache
+    ports:
+      - "8087:8080"
+    environment:
+      - OPENPROJECT_SECRET_KEY_BASE=changeme
+      - OPENPROJECT_ADMIN_USER=admin@example.com
+      - OPENPROJECT_ADMIN_PASSWORD=Admin123!
+      - OPENPROJECT_HOST__NAME=http://localhost:8087
+    volumes:
+      - openproject-data:/var/openproject
+      - openproject-logs:/var/log/openproject
+
+  openproject-db:
+    image: postgres:15-alpine
+    restart: unless-stopped
+    environment:
+      - POSTGRES_DB=openproject
+      - POSTGRES_USER=openproject
+      - POSTGRES_PASSWORD=openproject
+    volumes:
+      - openproject-db:/var/lib/postgresql/data
+
+  openproject-cache:
+    image: redis:7-alpine
+    restart: unless-stopped
+    volumes:
+      - openproject-cache:/data
+
+volumes:
+  openproject-data:
+  openproject-logs:
+  openproject-db:
+  openproject-cache:

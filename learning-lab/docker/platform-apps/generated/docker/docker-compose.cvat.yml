@@ -1,0 +1,17 @@
+# Notes: Requires Postgres, Redis, and worker containers.
+services:
+  cvat:
+    image: openvinotoolkit/cvat-server:2.13.0
+    container_name: cvat
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

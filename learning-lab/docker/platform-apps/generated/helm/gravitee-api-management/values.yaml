@@ -1,0 +1,4 @@
+image: graviteeio/apim-management-ui:4.4.0
+service:
+  port: 8086
+resources: {}

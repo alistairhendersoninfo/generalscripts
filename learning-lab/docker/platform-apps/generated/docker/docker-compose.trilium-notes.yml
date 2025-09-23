@@ -1,0 +1,17 @@
+# Notes: Persist /home/node/trilium-data volume.
+services:
+  trilium-notes:
+    image: zadam/trilium:0.63.5
+    container_name: trilium-notes
+    restart: unless-stopped
+    ports:
+      - "8092:8092"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

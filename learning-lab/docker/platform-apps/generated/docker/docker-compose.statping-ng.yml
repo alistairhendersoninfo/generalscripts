@@ -1,0 +1,17 @@
+# Notes: Supports Postgres or MySQL backends; Postgres recommended.
+services:
+  statping-ng:
+    image: statping-ng/statping-ng:latest
+    container_name: statping-ng
+    restart: unless-stopped
+    ports:
+      - "8082:8082"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

@@ -1,0 +1,4 @@
+image: rancher/rancher:latest
+service:
+  port: 9080
+resources: {}

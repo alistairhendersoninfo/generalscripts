@@ -1,0 +1,17 @@
+# Notes: Requires Postgres database and agent service.
+services:
+  woodpecker-ci:
+    image: woodpeckerci/woodpecker-server:v2.0.1
+    container_name: woodpecker-ci
+    restart: unless-stopped
+    ports:
+      - "8001:8001"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

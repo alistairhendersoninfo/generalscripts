@@ -1,0 +1,4 @@
+image: kizaing/kavita:0.7.3
+service:
+  port: 5000
+resources: {}

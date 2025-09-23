@@ -1,0 +1,17 @@
+# Notes: Stateless encrypted pastebin; mount data volume.
+services:
+  privatebin:
+    image: privatebin/nginx-fpm-alpine:1.6.2
+    container_name: privatebin
+    restart: unless-stopped
+    ports:
+      - "8085:8085"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

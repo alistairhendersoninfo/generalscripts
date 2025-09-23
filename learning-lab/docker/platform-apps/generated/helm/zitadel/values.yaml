@@ -1,0 +1,4 @@
+image: ghcr.io/zitadel/zitadel:2.48.0
+service:
+  port: 8081
+resources: {}

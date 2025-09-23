@@ -1,0 +1,17 @@
+# Notes: Requires Postgres and Redis containers.
+services:
+  mayan-edms:
+    image: mayanedms/mayanedms:4.5
+    container_name: mayan-edms
+    restart: unless-stopped
+    ports:
+      - "8094:8094"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

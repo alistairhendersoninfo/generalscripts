@@ -1,0 +1,4 @@
+image: glitchtip/glitchtip:3.2.2
+service:
+  port: 9000
+resources: {}

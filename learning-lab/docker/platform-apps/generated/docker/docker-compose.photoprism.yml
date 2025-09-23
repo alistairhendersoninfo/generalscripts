@@ -1,0 +1,17 @@
+# Notes: Requires MariaDB; mount originals storage.
+services:
+  photoprism:
+    image: photoprism/photoprism:20240330
+    container_name: photoprism
+    restart: unless-stopped
+    ports:
+      - "2342:2342"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

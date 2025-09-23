@@ -1,0 +1,4 @@
+image: espocrm/espocrm:8.3.4
+service:
+  port: 8092
+resources: {}

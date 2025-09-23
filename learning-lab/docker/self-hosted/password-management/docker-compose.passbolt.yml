@@ -1,0 +1,29 @@
+version: "3.9"
+
+services:
+  passbolt:
+    image: passbolt/passbolt:4.4.2-ce
+    restart: unless-stopped
+    env_file:
+      - ./passbolt/.env
+    depends_on:
+      - passbolt-db
+    ports:
+      - "80826:443"
+    volumes:
+      - passbolt-gpg:/var/lib/passbolt
+
+  passbolt-db:
+    image: mariadb:10.6
+    restart: unless-stopped
+    environment:
+      - MYSQL_ROOT_PASSWORD=passbolt
+      - MYSQL_DATABASE=passbolt
+      - MYSQL_USER=passbolt
+      - MYSQL_PASSWORD=passbolt
+    volumes:
+      - passbolt-db:/var/lib/mysql
+
+volumes:
+  passbolt-gpg:
+  passbolt-db:

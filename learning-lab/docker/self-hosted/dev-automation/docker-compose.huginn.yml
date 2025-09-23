@@ -1,0 +1,35 @@
+version: "3.9"
+
+services:
+  huginn:
+    image: huginn/huginn-single-process:2.0
+    restart: unless-stopped
+    depends_on:
+      - huginn-db
+    ports:
+      - "80823:3000"
+    environment:
+      - HUGINN_DATABASE_NAME=huginn
+      - HUGINN_DATABASE_USERNAME=huginn
+      - HUGINN_DATABASE_PASSWORD=huginn
+      - HUGINN_DATABASE_HOST=huginn-db
+      - INVITATION_CODE=letmein
+      - ADMIN_EMAIL=admin@localhost
+      - ADMIN_PASSWORD=Admin123!
+    volumes:
+      - huginn-data:/var/lib/huginn
+
+  huginn-db:
+    image: mariadb:10.6
+    restart: unless-stopped
+    environment:
+      - MYSQL_ROOT_PASSWORD=huginn
+      - MYSQL_DATABASE=huginn
+      - MYSQL_USER=huginn
+      - MYSQL_PASSWORD=huginn
+    volumes:
+      - huginn-db:/var/lib/mysql
+
+volumes:
+  huginn-data:
+  huginn-db:

@@ -1,0 +1,4 @@
+image: quay.io/mediagoblin/mediagoblin:0.12.0
+service:
+  port: 3014
+resources: {}

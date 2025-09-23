@@ -1,0 +1,4 @@
+image: linuxserver/piwigo:latest
+service:
+  port: 3011
+resources: {}

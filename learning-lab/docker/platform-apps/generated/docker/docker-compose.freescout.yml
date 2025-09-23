@@ -1,0 +1,17 @@
+# Notes: Needs MariaDB database.
+services:
+  freescout:
+    image: tiredofit/freescout:1.12.1
+    container_name: freescout
+    restart: unless-stopped
+    ports:
+      - "8088:8088"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

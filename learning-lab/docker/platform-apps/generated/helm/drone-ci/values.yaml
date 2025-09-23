@@ -1,0 +1,4 @@
+image: drone/drone:2
+service:
+  port: 8081
+resources: {}

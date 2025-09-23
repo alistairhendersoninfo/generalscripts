@@ -1,0 +1,17 @@
+# Notes: Configure SECRET_KEY and Postgres connection.
+services:
+  healthchecks:
+    image: healthchecks/healthchecks:2.4
+    container_name: healthchecks
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

@@ -1,0 +1,4 @@
+image: tiddlywiki:5.3.2
+service:
+  port: 8089
+resources: {}

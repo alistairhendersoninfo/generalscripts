@@ -1,0 +1,4 @@
+image: osticket/osticket:1.18
+service:
+  port: 8087
+resources: {}

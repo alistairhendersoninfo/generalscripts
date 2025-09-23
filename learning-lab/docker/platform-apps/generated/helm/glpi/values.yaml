@@ -1,0 +1,4 @@
+image: diouxx/glpi:10.0.12
+service:
+  port: 8086
+resources: {}

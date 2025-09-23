@@ -1,0 +1,17 @@
+# Notes: Uses MongoDB backend.
+services:
+  ackee:
+    image: electerious/ackee:3.5.0
+    container_name: ackee
+    restart: unless-stopped
+    ports:
+      - "3001:3001"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

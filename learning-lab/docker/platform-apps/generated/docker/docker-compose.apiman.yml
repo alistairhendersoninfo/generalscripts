@@ -1,0 +1,17 @@
+# Notes: Requires Postgres JDBC datasource.
+services:
+  apiman:
+    image: apiman/on-wildfly:3.0.0.Final
+    container_name: apiman
+    restart: unless-stopped
+    ports:
+      - "8087:8087"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

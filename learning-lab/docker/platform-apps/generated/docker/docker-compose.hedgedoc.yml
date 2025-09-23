@@ -1,0 +1,17 @@
+# Notes: Requires Postgres and Redis configuration.
+services:
+  hedgedoc:
+    image: quay.io/hedgedoc/hedgedoc:1.9.9
+    container_name: hedgedoc
+    restart: unless-stopped
+    ports:
+      - "8090:8090"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

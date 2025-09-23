@@ -1,0 +1,4 @@
+image: baserow/baserow:1.21.1
+service:
+  port: 8085
+resources: {}

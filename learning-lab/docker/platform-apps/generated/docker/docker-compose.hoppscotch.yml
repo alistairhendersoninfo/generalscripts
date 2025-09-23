@@ -1,0 +1,17 @@
+# Notes: Ships as a stateless web UI.
+services:
+  hoppscotch:
+    image: hoppscotch/hoppscotch:latest
+    container_name: hoppscotch
+    restart: unless-stopped
+    ports:
+      - "3004:3004"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

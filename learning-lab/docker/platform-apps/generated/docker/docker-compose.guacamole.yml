@@ -1,0 +1,17 @@
+# Notes: Deploy with guacd service and Postgres or MySQL backend.
+services:
+  guacamole:
+    image: guacamole/guacamole:1.5.3
+    container_name: guacamole
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

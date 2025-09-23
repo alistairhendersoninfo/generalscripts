@@ -1,0 +1,4 @@
+image: tuxgasy/dolibarr:17.0.3
+service:
+  port: 8091
+resources: {}

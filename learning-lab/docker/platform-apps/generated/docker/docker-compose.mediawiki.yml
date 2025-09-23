@@ -1,0 +1,17 @@
+# Notes: Requires MariaDB or MySQL database.
+services:
+  mediawiki:
+    image: mediawiki:1.41
+    container_name: mediawiki
+    restart: unless-stopped
+    ports:
+      - "8087:8087"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

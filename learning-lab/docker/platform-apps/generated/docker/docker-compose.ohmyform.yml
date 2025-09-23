@@ -1,0 +1,17 @@
+# Notes: Requires Postgres database.
+services:
+  ohmyform:
+    image: ohmyform/ohmyform:1.1.0
+    container_name: ohmyform
+    restart: unless-stopped
+    ports:
+      - "5000:5000"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

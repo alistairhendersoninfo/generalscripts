@@ -1,0 +1,17 @@
+# Notes: Needs MariaDB database.
+services:
+  flarum:
+    image: mondedie/flarum:1.8.1
+    container_name: flarum
+    restart: unless-stopped
+    ports:
+      - "8102:8102"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

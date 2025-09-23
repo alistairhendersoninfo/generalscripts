@@ -1,0 +1,4 @@
+image: parseplatform/parse-server:6.4.0
+service:
+  port: 1337
+resources: {}

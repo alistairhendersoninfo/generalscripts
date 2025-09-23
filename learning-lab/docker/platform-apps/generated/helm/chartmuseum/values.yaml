@@ -1,0 +1,4 @@
+image: chartmuseum/chartmuseum:v0.14.0
+service:
+  port: 8087
+resources: {}

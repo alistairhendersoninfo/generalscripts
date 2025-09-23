@@ -1,0 +1,4 @@
+image: framasoft/framadate:latest
+service:
+  port: 8081
+resources: {}

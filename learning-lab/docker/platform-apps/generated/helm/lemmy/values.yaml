@@ -1,0 +1,4 @@
+image: dessalines/lemmy:0.19.3
+service:
+  port: 1236
+resources: {}

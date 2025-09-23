@@ -1,0 +1,4 @@
+image: bitnami/discourse:3.2.2
+service:
+  port: 8101
+resources: {}

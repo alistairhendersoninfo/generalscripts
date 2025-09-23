@@ -1,0 +1,17 @@
+# Notes: Requires MariaDB database.
+services:
+  linkace:
+    image: linkace/linkace:1.12.2
+    container_name: linkace
+    restart: unless-stopped
+    ports:
+      - "8094:8094"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

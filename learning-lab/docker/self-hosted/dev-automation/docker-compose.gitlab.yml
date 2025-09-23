@@ -1,0 +1,21 @@
+version: "3.9"
+
+services:
+  gitlab:
+    image: gitlab/gitlab-ce:16.10.1-ce.0
+    restart: unless-stopped
+    hostname: gitlab.localhost
+    environment:
+      - GITLAB_OMNIBUS_CONFIG=external_url 'http://localhost:8929'; gitlab_rails['initial_root_password']='Admin123!';
+    ports:
+      - "8929:80"
+      - "2223:22"
+    volumes:
+      - gitlab-config:/etc/gitlab
+      - gitlab-logs:/var/log/gitlab
+      - gitlab-data:/var/opt/gitlab
+
+volumes:
+  gitlab-config:
+  gitlab-logs:
+  gitlab-data:

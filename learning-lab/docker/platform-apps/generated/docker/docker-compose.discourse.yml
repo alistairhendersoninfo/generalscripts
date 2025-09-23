@@ -1,0 +1,17 @@
+# Notes: Requires Postgres and Redis; SMTP optional.
+services:
+  discourse:
+    image: bitnami/discourse:3.2.2
+    container_name: discourse
+    restart: unless-stopped
+    ports:
+      - "8101:8101"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

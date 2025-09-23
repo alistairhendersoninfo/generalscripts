@@ -1,0 +1,4 @@
+image: gotson/komga:1.5.1
+service:
+  port: 25600
+resources: {}

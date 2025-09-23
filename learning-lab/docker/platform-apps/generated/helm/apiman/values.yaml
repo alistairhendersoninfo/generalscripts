@@ -1,0 +1,4 @@
+image: apiman/on-wildfly:3.0.0.Final
+service:
+  port: 8087
+resources: {}

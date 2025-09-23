@@ -1,0 +1,4 @@
+image: cortezaproject/corteza:2023.9
+service:
+  port: 18080
+resources: {}

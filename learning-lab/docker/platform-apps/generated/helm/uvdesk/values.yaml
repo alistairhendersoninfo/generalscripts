@@ -1,0 +1,4 @@
+image: uvdesk/helpdesk:1.0.19
+service:
+  port: 8089
+resources: {}

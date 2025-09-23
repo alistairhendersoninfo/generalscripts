@@ -1,0 +1,4 @@
+image: awesomedata/drawdb:latest
+service:
+  port: 3009
+resources: {}

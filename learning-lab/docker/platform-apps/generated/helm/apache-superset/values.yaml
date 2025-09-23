@@ -1,0 +1,4 @@
+image: apache/superset:3.1.0
+service:
+  port: 8088
+resources: {}

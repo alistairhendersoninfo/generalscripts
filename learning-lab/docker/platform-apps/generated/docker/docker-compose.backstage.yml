@@ -1,0 +1,17 @@
+# Notes: Configure app-config to use Postgres backend.
+services:
+  backstage:
+    image: ghcr.io/backstage/backstage:1.24.0
+    container_name: backstage
+    restart: unless-stopped
+    ports:
+      - "7007:7007"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

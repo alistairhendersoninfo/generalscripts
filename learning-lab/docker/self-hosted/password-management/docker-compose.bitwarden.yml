@@ -1,0 +1,15 @@
+version: "3.9"
+
+services:
+  vaultwarden:
+    image: vaultwarden/server:1.30.5
+    restart: unless-stopped
+    environment:
+      - ADMIN_TOKEN=changeme
+    ports:
+      - "80825:80"
+    volumes:
+      - vaultwarden-data:/data
+
+volumes:
+  vaultwarden-data:

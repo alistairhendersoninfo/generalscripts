@@ -1,0 +1,4 @@
+image: offen/docker:23.2.0
+service:
+  port: 9877
+resources: {}

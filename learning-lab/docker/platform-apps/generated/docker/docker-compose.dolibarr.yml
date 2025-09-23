@@ -1,0 +1,17 @@
+# Notes: Needs MariaDB database.
+services:
+  dolibarr:
+    image: tuxgasy/dolibarr:17.0.3
+    container_name: dolibarr
+    restart: unless-stopped
+    ports:
+      - "8091:8091"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

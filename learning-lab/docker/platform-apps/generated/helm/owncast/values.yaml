@@ -1,0 +1,4 @@
+image: owncast/owncast:0.1.3
+service:
+  port: 8096
+resources: {}

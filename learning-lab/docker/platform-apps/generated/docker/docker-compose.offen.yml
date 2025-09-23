@@ -1,0 +1,17 @@
+# Notes: Uses internal SQLite by default.
+services:
+  offen:
+    image: offen/docker:23.2.0
+    container_name: offen
+    restart: unless-stopped
+    ports:
+      - "9877:9877"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

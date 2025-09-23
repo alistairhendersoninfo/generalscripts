@@ -1,0 +1,17 @@
+# Notes: Depends on Postgres and Redis.
+services:
+  peertube:
+    image: chocobozzz/peertube:6.1.0
+    container_name: peertube
+    restart: unless-stopped
+    ports:
+      - "9000:9000"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

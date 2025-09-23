@@ -1,0 +1,17 @@
+# Notes: Mount /app/data for persistence.
+services:
+  uptime-kuma:
+    image: louislam/uptime-kuma:1.23.7
+    container_name: uptime-kuma
+    restart: unless-stopped
+    ports:
+      - "3001:3001"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

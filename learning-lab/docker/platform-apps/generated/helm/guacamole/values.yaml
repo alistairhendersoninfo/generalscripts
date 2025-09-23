@@ -1,0 +1,4 @@
+image: guacamole/guacamole:1.5.3
+service:
+  port: 8080
+resources: {}

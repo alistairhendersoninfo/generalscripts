@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Google Charts GDP</title>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.1/dist/tailwind.min.css" />
+  <style> body { background: #0f172a; color:#e2e8f0; } </style>
+</head>
+<body>
+  <div class="max-w-4xl mx-auto py-10">
+    <h1 class="text-3xl font-semibold mb-4">GDP per capita (Google Charts)</h1>
+    <div id="chart" style="height:400px"></div>
+  </div>
+  <script>
+    google.charts.load('current', { packages: ['corechart'] });
+    google.charts.setOnLoadCallback(drawChart);
+
+    async function drawChart() {
+      const res = await fetch('/api/worldbank/gdp_per_capita?country=USA&limit=30');
+      const data = await res.json();
+      const rows = [['Year', 'GDP']].concat(data.series.map(p => [p.period, Number(p.value)]));
+      const table = google.visualization.arrayToDataTable(rows);
+      const chart = new google.visualization.LineChart(document.getElementById('chart'));
+      chart.draw(table, {
+        backgroundColor: '#0f172a',
+        legend: { textStyle: { color: '#cbd5f5' } },
+        hAxis: { textStyle: { color: '#cbd5f5' } },
+        vAxis: { textStyle: { color: '#cbd5f5' } },
+        colors: ['#38bdf8'],
+      });
+    }
+  </script>
+</body>
+</html>

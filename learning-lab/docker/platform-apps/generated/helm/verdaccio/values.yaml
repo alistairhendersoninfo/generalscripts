@@ -1,0 +1,4 @@
+image: verdaccio/verdaccio:6.0
+service:
+  port: 4873
+resources: {}

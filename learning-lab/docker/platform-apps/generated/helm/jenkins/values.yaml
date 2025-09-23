@@ -1,0 +1,4 @@
+image: jenkins/jenkins:lts-jdk17
+service:
+  port: 8080
+resources: {}

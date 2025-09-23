@@ -1,0 +1,17 @@
+# Notes: Persist /var/www/shaarli/data volume.
+services:
+  shaarli:
+    image: shaarli/shaarli:2024.02.2
+    container_name: shaarli
+    restart: unless-stopped
+    ports:
+      - "8083:8083"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

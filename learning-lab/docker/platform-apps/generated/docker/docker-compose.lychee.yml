@@ -1,0 +1,17 @@
+# Notes: Needs MariaDB credentials.
+services:
+  lychee:
+    image: lycheeorg/lychee:latest
+    container_name: lychee
+    restart: unless-stopped
+    ports:
+      - "3012:3012"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

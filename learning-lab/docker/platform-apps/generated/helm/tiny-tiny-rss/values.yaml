@@ -1,0 +1,4 @@
+image: cthulhoo/ttrss-fpm-pgsql:2024-04-14
+service:
+  port: 8088
+resources: {}

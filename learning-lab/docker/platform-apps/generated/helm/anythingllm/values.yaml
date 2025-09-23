@@ -1,0 +1,4 @@
+image: mintplexlabs/anything-llm:latest
+service:
+  port: 3000
+resources: {}

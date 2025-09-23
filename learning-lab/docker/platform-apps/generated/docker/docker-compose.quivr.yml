@@ -1,0 +1,17 @@
+# Notes: Needs Postgres, Redis, and a vector store.
+services:
+  quivr:
+    image: quivr/quivr:latest
+    container_name: quivr
+    restart: unless-stopped
+    ports:
+      - "3001:3001"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

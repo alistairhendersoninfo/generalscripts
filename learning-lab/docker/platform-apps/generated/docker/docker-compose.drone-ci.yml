@@ -1,0 +1,17 @@
+# Notes: Requires Postgres database and RPC secret.
+services:
+  drone-ci:
+    image: drone/drone:2
+    container_name: drone-ci
+    restart: unless-stopped
+    ports:
+      - "8081:8081"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

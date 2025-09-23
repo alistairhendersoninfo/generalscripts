@@ -1,0 +1,17 @@
+# Notes: Persist config and library directories.
+services:
+  kavita:
+    image: kizaing/kavita:0.7.3
+    container_name: kavita
+    restart: unless-stopped
+    ports:
+      - "5000:5000"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

@@ -1,0 +1,17 @@
+# Notes: Requires Postgres database and optional nginx frontend.
+services:
+  tiny-tiny-rss:
+    image: cthulhoo/ttrss-fpm-pgsql:2024-04-14
+    container_name: tiny-tiny-rss
+    restart: unless-stopped
+    ports:
+      - "8088:8088"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

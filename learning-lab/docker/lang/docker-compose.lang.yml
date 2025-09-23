@@ -1,0 +1,38 @@
+services:
+  langflow:
+    image: langflowai/langflow:1.0.11
+    ports:
+      - 7860:7860
+    environment:
+      LANGFLOW_SUPERUSER: admin
+      LANGFLOW_SUPERUSER_PASSWORD: admin
+    volumes:
+      - ./flows:/app/langflow/flows
+    networks: [lab]
+
+  langchain-service:
+    build: ./langchain-service
+    environment:
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-changeme}
+      CLICKHOUSE_HOST: clickhouse
+      CLICKHOUSE_PORT: 9000
+      CLICKHOUSE_USER: analytics
+      CLICKHOUSE_PASSWORD: analytics
+    ports:
+      - 8001:8000
+    networks: [lab]
+
+  langgraph:
+    build: ./langgraph
+    command: ["python", "workflow.py"]
+    networks: [lab]
+    environment:
+      CLICKHOUSE_HOST: clickhouse
+      CLICKHOUSE_PORT: 9000
+      CLICKHOUSE_USER: analytics
+      CLICKHOUSE_PASSWORD: analytics
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_docker_core_lab

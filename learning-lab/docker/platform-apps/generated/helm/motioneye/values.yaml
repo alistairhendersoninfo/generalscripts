@@ -1,0 +1,4 @@
+image: ccrisan/motioneye:master-amd64
+service:
+  port: 8765
+resources: {}

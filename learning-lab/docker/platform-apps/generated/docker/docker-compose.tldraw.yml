@@ -1,0 +1,17 @@
+# Notes: Provide TLS termination via lab nginx master as needed.
+services:
+  tldraw:
+    image: ghcr.io/tldraw/tldraw:1.0.1
+    container_name: tldraw
+    restart: unless-stopped
+    ports:
+      - "3007:3007"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

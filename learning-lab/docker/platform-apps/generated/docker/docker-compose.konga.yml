@@ -1,0 +1,17 @@
+# Notes: Configure Postgres backend for persistent storage.
+services:
+  konga:
+    image: pantsel/konga:latest
+    container_name: konga
+    restart: unless-stopped
+    ports:
+      - "1338:1338"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

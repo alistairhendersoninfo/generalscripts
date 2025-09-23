@@ -1,0 +1,17 @@
+# Notes: Supports SQLite out of the box; Postgres recommended for scale.
+services:
+  anythingllm:
+    image: mintplexlabs/anything-llm:latest
+    container_name: anythingllm
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

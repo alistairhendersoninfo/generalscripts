@@ -1,0 +1,17 @@
+# Notes: Optional Postgres database for state.
+services:
+  grafana:
+    image: grafana/grafana:10.4.1
+    container_name: grafana
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

@@ -1,0 +1,4 @@
+image: monica:latest
+service:
+  port: 8094
+resources: {}

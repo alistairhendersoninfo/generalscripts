@@ -1,0 +1,17 @@
+# Notes: Deploy with the companion frontend plus Postgres and Redis.
+services:
+  penpot:
+    image: penpotapp/backend:2.1.1
+    container_name: penpot
+    restart: unless-stopped
+    ports:
+      - "8095:8095"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

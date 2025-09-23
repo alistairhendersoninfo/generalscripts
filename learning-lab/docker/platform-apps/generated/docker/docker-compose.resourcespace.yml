@@ -1,0 +1,17 @@
+# Notes: Requires MariaDB backend.
+services:
+  resourcespace:
+    image: mondora/resourcespace:10.2
+    container_name: resourcespace
+    restart: unless-stopped
+    ports:
+      - "3015:3015"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

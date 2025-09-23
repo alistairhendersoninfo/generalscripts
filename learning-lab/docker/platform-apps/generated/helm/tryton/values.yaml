@@ -1,0 +1,4 @@
+image: tryton/tryton:7.2
+service:
+  port: 8000
+resources: {}

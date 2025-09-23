@@ -1,0 +1,4 @@
+image: linkace/linkace:1.12.2
+service:
+  port: 8094
+resources: {}

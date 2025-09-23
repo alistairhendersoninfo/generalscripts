@@ -1,0 +1,4 @@
+image: xwiki:lts-postgres-tomcat
+service:
+  port: 8080
+resources: {}

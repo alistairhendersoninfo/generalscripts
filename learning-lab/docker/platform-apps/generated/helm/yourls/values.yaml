@@ -1,0 +1,4 @@
+image: yourls:1.9.2
+service:
+  port: 8084
+resources: {}

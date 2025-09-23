@@ -1,0 +1,4 @@
+image: mondora/resourcespace:10.2
+service:
+  port: 3015
+resources: {}

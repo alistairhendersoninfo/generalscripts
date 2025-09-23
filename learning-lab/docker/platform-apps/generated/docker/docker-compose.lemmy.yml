@@ -1,0 +1,17 @@
+# Notes: Requires Postgres and includes pictrs plus UI services.
+services:
+  lemmy:
+    image: dessalines/lemmy:0.19.3
+    container_name: lemmy
+    restart: unless-stopped
+    ports:
+      - "1236:1236"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

@@ -1,0 +1,4 @@
+image: flowiseai/flowise:latest
+service:
+  port: 3000
+resources: {}

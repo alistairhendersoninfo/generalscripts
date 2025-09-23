@@ -1,0 +1,17 @@
+# Notes: Mount config and cache volumes plus media libraries.
+services:
+  jellyfin:
+    image: jellyfin/jellyfin:10.8.13
+    container_name: jellyfin
+    restart: unless-stopped
+    ports:
+      - "8099:8099"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

@@ -1,0 +1,17 @@
+# Notes: Requires Postgres and Redis.
+services:
+  shynet:
+    image: milesmcc/shynet:latest
+    container_name: shynet
+    restart: unless-stopped
+    ports:
+      - "8082:8082"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

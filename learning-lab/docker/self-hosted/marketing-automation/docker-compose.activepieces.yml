@@ -1,0 +1,44 @@
+version: "3.9"
+
+services:
+  activepieces:
+    image: activepieces/activepieces:0.18.0
+    restart: unless-stopped
+    environment:
+      - AP_API_PORT=80815
+      - AP_FRONTEND_URL=http://localhost:80815
+      - AP_POSTGRES_HOST=activepieces-db
+      - AP_POSTGRES_DATABASE=activepieces
+      - AP_POSTGRES_USERNAME=activepieces
+      - AP_POSTGRES_PASSWORD=activepieces
+      - AP_REDIS_HOST=activepieces-redis
+      - AP_JWT_SECRET=supersecret
+    ports:
+      - "80815:8080"
+    depends_on:
+      - activepieces-db
+      - activepieces-redis
+    volumes:
+      - activepieces-data:/app/pieces
+
+  activepieces-db:
+    image: postgres:15-alpine
+    restart: unless-stopped
+    environment:
+      - POSTGRES_DB=activepieces
+      - POSTGRES_USER=activepieces
+      - POSTGRES_PASSWORD=activepieces
+    volumes:
+      - activepieces-db:/var/lib/postgresql/data
+
+  activepieces-redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    command: redis-server --appendonly yes
+    volumes:
+      - activepieces-redis:/data
+
+volumes:
+  activepieces-data:
+  activepieces-db:
+  activepieces-redis:

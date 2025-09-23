@@ -1,0 +1,18 @@
+# Notes: Shared object storage service across the lab.
+services:
+  minio:
+    image: minio/minio:RELEASE.2024-03-30T00-08-50Z
+    container_name: minio
+    restart: unless-stopped
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

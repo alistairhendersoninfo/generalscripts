@@ -1,0 +1,4 @@
+image: excalidraw/excalidraw:latest
+service:
+  port: 3006
+resources: {}

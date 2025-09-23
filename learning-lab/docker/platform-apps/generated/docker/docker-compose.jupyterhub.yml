@@ -1,0 +1,17 @@
+# Notes: Configure authenticator and spawner; mount config.
+services:
+  jupyterhub:
+    image: jupyterhub/jupyterhub:4.1.5
+    container_name: jupyterhub
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

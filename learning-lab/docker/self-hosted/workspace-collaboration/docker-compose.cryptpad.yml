@@ -1,0 +1,33 @@
+version: "3.9"
+
+services:
+  cryptpad:
+    image: cryptpad/cryptpad:5.5.0
+    restart: unless-stopped
+    ports:
+      - "3001:3000"
+    environment:
+      - CRYPTPAD_CONFIG_COUCHDB__URL=http://cryptpad-couchdb:5984/
+      - CRYPTPAD_CONFIG_ADMIN_EMAIL=admin@lab.local
+      - CRYPTPAD_CONFIG_ADMIN_PASSWORD=Admin123!
+    volumes:
+      - cryptpad-data:/cryptpad/datastore
+      - cryptpad-config:/cryptpad/config
+      - cryptpad-custom:/cryptpad/customize
+    depends_on:
+      - cryptpad-couchdb
+
+  cryptpad-couchdb:
+    image: couchdb:3
+    restart: unless-stopped
+    environment:
+      - COUCHDB_USER=cryptpad
+      - COUCHDB_PASSWORD=cryptpad
+    volumes:
+      - cryptpad-couchdb:/opt/couchdb/data
+
+volumes:
+  cryptpad-data:
+  cryptpad-config:
+  cryptpad-custom:
+  cryptpad-couchdb:

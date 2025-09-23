@@ -1,0 +1,4 @@
+image: opensourcepos/osp:0.9.4
+service:
+  port: 8097
+resources: {}

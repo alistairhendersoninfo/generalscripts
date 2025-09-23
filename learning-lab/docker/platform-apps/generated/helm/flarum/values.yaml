@@ -1,0 +1,4 @@
+image: mondedie/flarum:1.8.1
+service:
+  port: 8102
+resources: {}

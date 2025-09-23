@@ -1,0 +1,4 @@
+image: statping-ng/statping-ng:latest
+service:
+  port: 8082
+resources: {}

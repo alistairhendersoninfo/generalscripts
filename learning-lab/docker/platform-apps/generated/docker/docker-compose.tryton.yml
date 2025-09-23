@@ -1,0 +1,17 @@
+# Notes: Connect to Postgres for persistence.
+services:
+  tryton:
+    image: tryton/tryton:7.2
+    container_name: tryton
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

@@ -1,0 +1,17 @@
+# Notes: Stateless metasearch; tune settings.yml as needed.
+services:
+  searxng:
+    image: searxng/searxng:2024.04.22-16c45362
+    container_name: searxng
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

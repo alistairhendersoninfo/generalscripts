@@ -1,0 +1,4 @@
+image: nocodb/nocodb:0.204.7
+service:
+  port: 8084
+resources: {}

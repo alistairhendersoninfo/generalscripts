@@ -1,0 +1,17 @@
+# Notes: Configure S3-compatible storage such as MinIO.
+services:
+  chartmuseum:
+    image: chartmuseum/chartmuseum:v0.14.0
+    container_name: chartmuseum
+    restart: unless-stopped
+    ports:
+      - "8087:8087"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

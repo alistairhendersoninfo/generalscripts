@@ -1,0 +1,17 @@
+# Notes: Requires shared memory and hardware acceleration configuration.
+services:
+  frigate:
+    image: blakeblackshear/frigate:0.13.0
+    container_name: frigate
+    restart: unless-stopped
+    ports:
+      - "8978:8978"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

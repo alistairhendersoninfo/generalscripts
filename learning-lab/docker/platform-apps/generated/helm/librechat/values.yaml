@@ -1,0 +1,4 @@
+image: ghcr.io/danny-avila/librechat:latest
+service:
+  port: 3080
+resources: {}

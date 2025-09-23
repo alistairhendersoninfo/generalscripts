@@ -1,0 +1,4 @@
+image: kutt/kutt:latest
+service:
+  port: 8000
+resources: {}

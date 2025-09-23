@@ -1,0 +1,17 @@
+# Notes: Depends on Postgres, Redis, and MinIO/S3 storage.
+services:
+  mediacms:
+    image: mediacms/mediacms:latest
+    container_name: mediacms
+    restart: unless-stopped
+    ports:
+      - "8098:8098"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

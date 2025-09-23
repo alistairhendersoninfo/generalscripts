@@ -1,0 +1,17 @@
+# Notes: Mount config and media volumes.
+services:
+  komga:
+    image: gotson/komga:1.5.1
+    container_name: komga
+    restart: unless-stopped
+    ports:
+      - "25600:25600"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

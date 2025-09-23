@@ -1,0 +1,4 @@
+image: zammad/zammad:6.3.0
+service:
+  port: 8085
+resources: {}

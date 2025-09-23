@@ -1,0 +1,42 @@
+version: "3.9"
+
+services:
+  sogo:
+    image: inverse/sogo:latest
+    restart: unless-stopped
+    ports:
+      - "20000:20000"
+    environment:
+      - SOGO_WORKERS=1
+      - SOGO_MAIL_DOMAIN=lab.local
+      - SOGO_USER_DEFAULT_DOMAIN=lab.local
+      - MYSQL_HOST=sogo-db
+      - MYSQL_DATABASE=sogo
+      - MYSQL_USER=sogo
+      - MYSQL_PASSWORD=sogopass
+      - VMAIL_UID=2000
+      - VMAIL_GID=2000
+    depends_on:
+      - sogo-db
+      - sogo-memcached
+    volumes:
+      - sogo-data:/var/lib/sogo
+
+  sogo-db:
+    image: mariadb:10.6
+    restart: unless-stopped
+    environment:
+      - MYSQL_ROOT_PASSWORD=sogopass
+      - MYSQL_DATABASE=sogo
+      - MYSQL_USER=sogo
+      - MYSQL_PASSWORD=sogopass
+    volumes:
+      - sogo-db:/var/lib/mysql
+
+  sogo-memcached:
+    image: memcached:1.6-alpine
+    restart: unless-stopped
+
+volumes:
+  sogo-data:
+  sogo-db:
