@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Nivo GDP</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.1/dist/tailwind.min.css" />
+  <style>
+    body { background: #0f172a; color: #e2e8f0; }
+    #root { height: 400px; }
+  </style>
+</head>
+<body>
+  <div class="max-w-4xl mx-auto py-10">
+    <h1 class="text-3xl font-semibold mb-4">GDP per capita (Nivo)</h1>
+    <div id="root"></div>
+  </div>
+  <script type="module">
+    import React, { useEffect, useState } from 'https://cdn.skypack.dev/react@18.2.0';
+    import { createRoot } from 'https://cdn.skypack.dev/react-dom@18.2.0/client';
+    import { ResponsiveLine } from 'https://cdn.skypack.dev/@nivo/line@0.83.0';
+
+    function App() {
+      const [series, setSeries] = useState([]);
+      useEffect(() => {
+        fetch('/api/worldbank/gdp_per_capita?country=USA&limit=30')
+          .then(r => r.json())
+          .then(data => setSeries([{ id: data.country, data: data.series.map(p => ({ x: p.period, y: p.value })) }]));
+      }, []);
+      if (!series.length) return <div>Loading…</div>;
+      return (
+        <ResponsiveLine
+          data={series}
+          margin={{ top: 20, right: 20, bottom: 60, left: 60 }}
+          colors={["#38bdf8"]}
+          axisBottom={{ tickRotation: -45, legend: 'Year', legendOffset: 46, legendPosition: 'middle' }}
+          axisLeft={{ legend: 'USD', legendOffset: -50, legendPosition: 'middle' }}
+          theme={{ textColor: '#cbd5f5', grid: { line: { stroke: '#1e293b' } } }}
+          enableSlices="x"
+        />
+      );
+    }
+
+    createRoot(document.getElementById('root')).render(<App />);
+  </script>
+</body>
+</html>

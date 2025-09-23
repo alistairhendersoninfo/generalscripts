@@ -1,0 +1,4 @@
+apiVersion: v2
+name: core
+version: 0.1.0
+description: Shared services for the learning lab

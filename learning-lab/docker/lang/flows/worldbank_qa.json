@@ -1,0 +1,16 @@
+{
+  "name": "WorldBank QA",
+  "nodes": [
+    {
+      "id": "prompt",
+      "type": "Prompt",
+      "config": {
+        "template": "Using the provided data points answer: {question}.\nData: {data}"
+      }
+    }
+  ],
+  "edges": [],
+  "metadata": {
+    "description": "Example LangFlow workspace referencing ClickHouse-backed data"
+  }
+}
