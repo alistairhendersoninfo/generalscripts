@@ -1,0 +1,25 @@
+version: "3.9"
+
+services:
+  zimbra:
+    image: zimbra/zm-docker:latest
+    hostname: mail
+    domainname: lab.local
+    restart: unless-stopped
+    ports:
+      - "9081:443"
+      - "9071:7071"
+      - "9025:25"
+      - "9043:587"
+    environment:
+      - ZMHOSTNAME=mail.lab.local
+      - ZMDOMAIN=lab.local
+      - PASSWORD=Admin123!
+    volumes:
+      - zimbra-data:/opt/zimbra
+    cap_add:
+      - NET_BIND_SERVICE
+    shm_size: 2g
+
+volumes:
+  zimbra-data:

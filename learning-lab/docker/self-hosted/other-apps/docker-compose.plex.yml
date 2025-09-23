@@ -1,0 +1,20 @@
+version: "3.9"
+
+services:
+  plex:
+    image: plexinc/pms-docker:1.40.0.7998-9e1b67b7e
+    restart: unless-stopped
+    network_mode: host
+    environment:
+      - PLEX_CLAIM=
+      - ADVERTISE_IP=http://localhost:32400/
+      - TZ=UTC
+    volumes:
+      - plex-config:/config
+      - plex-transcode:/transcode
+      - plex-media:/data
+
+volumes:
+  plex-config:
+  plex-transcode:
+  plex-media:

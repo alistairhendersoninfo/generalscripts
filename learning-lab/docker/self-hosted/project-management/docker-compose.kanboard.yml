@@ -1,0 +1,31 @@
+version: "3.9"
+
+services:
+  kanboard:
+    image: kanboard/kanboard:v1.2.37
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    environment:
+      - DATABASE_URL=postgres://kanboard:kanboard@kanboard-db:5432/kanboard
+      - PLUGIN_INSTALLER=true
+      - KANBOARD_ADMIN=admin
+      - KANBOARD_PASSWORD=Admin123!
+    volumes:
+      - kanboard-data:/var/www/app/data
+    depends_on:
+      - kanboard-db
+
+  kanboard-db:
+    image: postgres:15-alpine
+    restart: unless-stopped
+    environment:
+      - POSTGRES_DB=kanboard
+      - POSTGRES_USER=kanboard
+      - POSTGRES_PASSWORD=kanboard
+    volumes:
+      - kanboard-db:/var/lib/postgresql/data
+
+volumes:
+  kanboard-data:
+  kanboard-db:

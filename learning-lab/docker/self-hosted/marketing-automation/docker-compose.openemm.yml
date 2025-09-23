@@ -1,0 +1,32 @@
+version: "3.9"
+
+services:
+  openemm:
+    image: openemm/openemm-ce:2019
+    restart: unless-stopped
+    ports:
+      - "80819:8080"
+    environment:
+      - DB_HOST=openemm-db
+      - DB_NAME=openemm
+      - DB_USER=openemm
+      - DB_PASSWORD=openemm
+    depends_on:
+      - openemm-db
+    volumes:
+      - openemm-data:/opt/openemm
+
+  openemm-db:
+    image: mariadb:10.6
+    restart: unless-stopped
+    environment:
+      - MYSQL_ROOT_PASSWORD=openemm
+      - MYSQL_DATABASE=openemm
+      - MYSQL_USER=openemm
+      - MYSQL_PASSWORD=openemm
+    volumes:
+      - openemm-db:/var/lib/mysql
+
+volumes:
+  openemm-data:
+  openemm-db:

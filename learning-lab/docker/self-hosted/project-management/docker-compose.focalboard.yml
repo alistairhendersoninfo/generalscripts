@@ -1,0 +1,32 @@
+version: "3.9"
+
+services:
+  focalboard:
+    image: mattermost/focalboard:7.12.0
+    restart: unless-stopped
+    ports:
+      - "8055:8000"
+    environment:
+      - DB_HOST=focalboard-db
+      - DB_PORT=5432
+      - DB_NAME=focalboard
+      - DB_USER=focalboard
+      - DB_PASSWORD=focalboard
+    volumes:
+      - focalboard-data:/opt/focalboard
+    depends_on:
+      - focalboard-db
+
+  focalboard-db:
+    image: postgres:15-alpine
+    restart: unless-stopped
+    environment:
+      - POSTGRES_DB=focalboard
+      - POSTGRES_USER=focalboard
+      - POSTGRES_PASSWORD=focalboard
+    volumes:
+      - focalboard-db:/var/lib/postgresql/data
+
+volumes:
+  focalboard-data:
+  focalboard-db:

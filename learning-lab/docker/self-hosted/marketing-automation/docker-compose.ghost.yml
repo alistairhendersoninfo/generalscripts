@@ -1,0 +1,34 @@
+version: "3.9"
+
+services:
+  ghost:
+    image: ghost:5-alpine
+    restart: unless-stopped
+    environment:
+      - database__client=mysql
+      - database__connection__host=ghost-db
+      - database__connection__user=ghost
+      - database__connection__password=ghost
+      - database__connection__database=ghost
+      - url=http://localhost:80812
+    depends_on:
+      - ghost-db
+    ports:
+      - "80812:2368"
+    volumes:
+      - ghost-content:/var/lib/ghost/content
+
+  ghost-db:
+    image: mariadb:10.6
+    restart: unless-stopped
+    environment:
+      - MYSQL_ROOT_PASSWORD=ghost
+      - MYSQL_DATABASE=ghost
+      - MYSQL_USER=ghost
+      - MYSQL_PASSWORD=ghost
+    volumes:
+      - ghost-db:/var/lib/mysql
+
+volumes:
+  ghost-content:
+  ghost-db:

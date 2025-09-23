@@ -1,0 +1,5 @@
+{
+    "require": {
+        "eclipxe/engineworks-pivot": "^2.3"
+    }
+}

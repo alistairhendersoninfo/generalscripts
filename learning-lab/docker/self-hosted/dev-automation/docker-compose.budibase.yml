@@ -1,0 +1,63 @@
+version: "3.9"
+
+services:
+  budibase-worker:
+    image: budibase/worker:2.25.8
+    restart: unless-stopped
+    environment:
+      - COUCHDB_URL=http://budibase-couchdb:5984
+      - REDIS_URL=redis://budibase-redis:6379
+    depends_on:
+      - budibase-couchdb
+      - budibase-redis
+
+  budibase-web:
+    image: budibase/web:2.25.8
+    restart: unless-stopped
+    ports:
+      - "80822:80"
+    environment:
+      - WORKER_URL=http://budibase-worker:4003
+      - MINIO_URL=http://budibase-minio:9000
+      - INTERNAL_MINIO_URL=http://budibase-minio:9000
+      - MINIO_ACCESS_KEY=budibase
+      - MINIO_SECRET_KEY=budibase
+      - COUCHDB_URL=http://budibase-couchdb:5984
+      - REDIS_URL=redis://budibase-redis:6379
+    depends_on:
+      - budibase-worker
+      - budibase-minio
+
+  budibase-couchdb:
+    image: couchdb:3
+    restart: unless-stopped
+    environment:
+      - COUCHDB_USER=budibase
+      - COUCHDB_PASSWORD=budibase
+    volumes:
+      - budibase-couchdb:/opt/couchdb/data
+
+  budibase-redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    command: redis-server --appendonly yes
+    volumes:
+      - budibase-redis:/data
+
+  budibase-minio:
+    image: minio/minio:RELEASE.2024-02-17T02-25-06Z
+    restart: unless-stopped
+    command: server /data --console-address ":9001"
+    environment:
+      - MINIO_ACCESS_KEY=budibase
+      - MINIO_SECRET_KEY=budibase
+    ports:
+      - "9002:9000"
+      - "9003:9001"
+    volumes:
+      - budibase-minio:/data
+
+volumes:
+  budibase-couchdb:
+  budibase-redis:
+  budibase-minio:

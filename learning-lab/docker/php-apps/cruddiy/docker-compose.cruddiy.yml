@@ -1,0 +1,11 @@
+services:
+  cruddiy:
+    build: .
+    ports:
+      - 8122:80
+    networks: [lab]
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_docker_core_lab

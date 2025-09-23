@@ -1,0 +1,55 @@
+{% extends "orders/base.html" %}
+{% block title %}Orders{% endblock %}
+{% block content %}
+<div class="flex items-center justify-between mb-6">
+  <h1 class="text-2xl font-semibold">Sales orders</h1>
+  <a href="/orders/new/" class="bg-slate-900 text-white px-4 py-2 rounded">New order</a>
+</div>
+<div class="bg-white rounded shadow overflow-x-auto">
+  <table class="min-w-full divide-y divide-slate-200">
+    <thead class="bg-slate-50">
+      <tr>
+        <th class="px-4 py-2 text-left text-xs font-semibold uppercase tracking-wider">Order</th>
+        <th class="px-4 py-2 text-left text-xs font-semibold uppercase tracking-wider">Customer</th>
+        <th class="px-4 py-2 text-left text-xs font-semibold uppercase tracking-wider">Status</th>
+        <th class="px-4 py-2 text-left text-xs font-semibold uppercase tracking-wider">Date</th>
+        <th class="px-4 py-2 text-left text-xs font-semibold uppercase tracking-wider">Total</th>
+        <th class="px-4 py-2"></th>
+      </tr>
+    </thead>
+    <tbody class="bg-white divide-y divide-slate-200">
+      {% for order in orders %}
+      <tr class="hover:bg-slate-50">
+        <td class="px-4 py-2">#{{ order.id }}</td>
+        <td class="px-4 py-2">{{ order.customer.name }}</td>
+        <td class="px-4 py-2 capitalize">{{ order.get_status_display }}</td>
+        <td class="px-4 py-2">{{ order.order_date }}</td>
+        <td class="px-4 py-2 font-medium">${{ order.total|floatformat:2 }}</td>
+        <td class="px-4 py-2 text-right">
+          <a href="/orders/{{ order.id }}/edit/" class="text-slate-600 hover:text-slate-900">Edit</a>
+        </td>
+      </tr>
+      <tr class="bg-slate-50/60">
+        <td class="px-6 pb-4 text-sm text-slate-600" colspan="6">
+          <div class="font-semibold mb-2">Line items</div>
+          <ul class="space-y-1">
+            {% for line in order.lines.all %}
+            <li class="flex justify-between">
+              <span>{{ line.sku.code }} — {{ line.sku.description }} (x{{ line.quantity }})</span>
+              <span>${{ line.extended_price|floatformat:2 }}</span>
+            </li>
+            {% empty %}
+            <li>No line items captured.</li>
+            {% endfor %}
+          </ul>
+        </td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td class="px-4 py-6 text-center text-slate-500" colspan="6">No orders yet.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

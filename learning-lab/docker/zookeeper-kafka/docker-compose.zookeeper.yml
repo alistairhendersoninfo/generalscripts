@@ -1,0 +1,51 @@
+services:
+  zookeeper-1:
+    image: bitnami/zookeeper:3.9.1
+    environment:
+      ZOO_SERVER_ID: 1
+      ZOO_SERVERS: zookeeper-1:2888:3888,zookeeper-2:2888:3888,zookeeper-3:2888:3888
+      ALLOW_ANONYMOUS_LOGIN: "yes"
+    networks: [coord]
+
+  zookeeper-2:
+    image: bitnami/zookeeper:3.9.1
+    environment:
+      ZOO_SERVER_ID: 2
+      ZOO_SERVERS: zookeeper-1:2888:3888,zookeeper-2:2888:3888,zookeeper-3:2888:3888
+      ALLOW_ANONYMOUS_LOGIN: "yes"
+    networks: [coord]
+
+  zookeeper-3:
+    image: bitnami/zookeeper:3.9.1
+    environment:
+      ZOO_SERVER_ID: 3
+      ZOO_SERVERS: zookeeper-1:2888:3888,zookeeper-2:2888:3888,zookeeper-3:2888:3888
+      ALLOW_ANONYMOUS_LOGIN: "yes"
+    networks: [coord]
+
+  kafka:
+    image: bitnami/kafka:3.6.1
+    environment:
+      KAFKA_CFG_ZOOKEEPER_CONNECT: zookeeper-1:2181,zookeeper-2:2181,zookeeper-3:2181
+      KAFKA_CFG_LISTENERS: PLAINTEXT://:9092
+      KAFKA_CFG_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+      KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE: "true"
+    ports:
+      - 9092:9092
+    networks: [coord]
+
+  kafka-connect:
+    image: debezium/connect:2.5
+    environment:
+      BOOTSTRAP_SERVERS: kafka:9092
+      GROUP_ID: clickhouse-sink
+      CONFIG_STORAGE_TOPIC: connect-config
+      OFFSET_STORAGE_TOPIC: connect-offset
+      STATUS_STORAGE_TOPIC: connect-status
+    ports:
+      - 8083:8083
+    networks: [coord]
+
+networks:
+  coord:
+    driver: bridge

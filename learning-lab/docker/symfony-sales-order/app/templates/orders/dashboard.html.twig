@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Sales Overview{% endblock %}
+
+{% block body %}
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+  <div class="rounded bg-white shadow p-6">
+    <h3 class="text-sm uppercase text-slate-500">Customers</h3>
+    <p class="text-4xl font-semibold">{{ customerCount }}</p>
+  </div>
+  <div class="rounded bg-white shadow p-6">
+    <h3 class="text-sm uppercase text-slate-500">SKUs</h3>
+    <p class="text-4xl font-semibold">{{ skuCount }}</p>
+  </div>
+  <div class="rounded bg-white shadow p-6">
+    <h3 class="text-sm uppercase text-slate-500">Orders</h3>
+    <p class="text-4xl font-semibold">{{ orderCount }}</p>
+  </div>
+</div>
+<div class="mt-10 bg-white shadow rounded p-6">
+  <h2 class="text-lg font-semibold mb-4">Workflow</h2>
+  <ul class="list-disc pl-6 space-y-2 text-slate-600">
+    <li>Start by creating a customer and delivery address.</li>
+    <li>Define SKUs with pricing for your catalog.</li>
+    <li>Capture sales orders with detailed line items.</li>
+  </ul>
+</div>
+{% endblock %}

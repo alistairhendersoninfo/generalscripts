@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>{% block title %}Sales Workspace{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.3/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-slate-100 min-h-screen">
+    <nav class="bg-slate-900 text-white">
+      <div class="max-w-6xl mx-auto flex items-center justify-between px-4 py-3">
+        <a href="/" class="text-xl font-semibold">Django Sales Orders</a>
+        <div class="space-x-4 text-sm">
+          <a class="hover:underline" href="/customers/">Customers</a>
+          <a class="hover:underline" href="/addresses/">Delivery Addresses</a>
+          <a class="hover:underline" href="/skus/">SKUs</a>
+          <a class="hover:underline" href="/orders/">Orders</a>
+        </div>
+      </div>
+    </nav>
+    <main class="max-w-6xl mx-auto py-10 px-4">
+      {% for message in messages %}
+      <div class="mb-4 rounded bg-emerald-100 border border-emerald-400 text-emerald-800 px-4 py-3">
+        {{ message }}
+      </div>
+      {% endfor %}
+      {% block content %}{% endblock %}
+    </main>
+  </body>
+</html>

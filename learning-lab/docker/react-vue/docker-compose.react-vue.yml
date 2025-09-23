@@ -1,0 +1,12 @@
+services:
+  react-demo:
+    build: ./react
+    networks: [lab]
+  vue-demo:
+    build: ./vue
+    networks: [lab]
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_docker_core_lab
