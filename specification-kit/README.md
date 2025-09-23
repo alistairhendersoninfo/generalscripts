@@ -21,18 +21,20 @@ specification-kit/
 
 1. Clone this repository and copy the `specification-kit` directory to the
    location where you keep documentation.
-2. Update the `docs/templates` files to match your organization's vocabulary.
-3. Author new specifications in `docs/examples` or your preferred location using
-   the provided templates.
+2. Create templates in `docs/templates` that match your organization's vocabulary.
+   See `docs/templates/README.md` for recommendations.
+3. Author new specifications in `docs/examples` or your preferred location using the templates you created.
 4. Customize `guides` and `tools` to include your review processes, linters, or
    CI hooks.
 
 ## Contributing
 
+This section should be customized for your project. Here is a template to get you started:
+
 1. Create a new branch for your change.
-2. Update or add specification templates, guides, or tooling.
-3. Run any validation tools included under `tools/`.
-4. Submit a pull request describing the improvements to the kit.
+2. Add or update specifications, following the project's guides and templates.
+3. If applicable, run any validation tools from the `tools/` directory.
+4. Submit a pull request for review.
 
 ## License
 
