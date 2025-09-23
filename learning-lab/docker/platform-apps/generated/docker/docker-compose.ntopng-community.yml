@@ -1,0 +1,17 @@
+# Notes: Needs NET_ADMIN capability and optionally PF_RING.
+services:
+  ntopng-community:
+    image: ntop/ntopng:5.8
+    container_name: ntopng-community
+    restart: unless-stopped
+    ports:
+      - "3002:3002"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

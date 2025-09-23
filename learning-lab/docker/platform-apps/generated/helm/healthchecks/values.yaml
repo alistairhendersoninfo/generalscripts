@@ -1,0 +1,4 @@
+image: healthchecks/healthchecks:2.4
+service:
+  port: 8000
+resources: {}

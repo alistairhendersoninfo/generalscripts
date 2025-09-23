@@ -1,0 +1,17 @@
+# Notes: Requires MariaDB and Elasticsearch.
+services:
+  espocrm:
+    image: espocrm/espocrm:8.3.4
+    container_name: espocrm
+    restart: unless-stopped
+    ports:
+      - "8092:8092"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

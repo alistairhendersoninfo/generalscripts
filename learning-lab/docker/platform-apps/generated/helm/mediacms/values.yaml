@@ -1,0 +1,4 @@
+image: mediacms/mediacms:latest
+service:
+  port: 8098
+resources: {}

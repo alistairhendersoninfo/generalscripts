@@ -1,0 +1,4 @@
+image: ntop/ntopng:5.8
+service:
+  port: 3002
+resources: {}

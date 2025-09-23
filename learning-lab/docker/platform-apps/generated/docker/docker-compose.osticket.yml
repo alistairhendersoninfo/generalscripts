@@ -1,0 +1,17 @@
+# Notes: Requires MariaDB or MySQL backend.
+services:
+  osticket:
+    image: osticket/osticket:1.18
+    container_name: osticket
+    restart: unless-stopped
+    ports:
+      - "8087:8087"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

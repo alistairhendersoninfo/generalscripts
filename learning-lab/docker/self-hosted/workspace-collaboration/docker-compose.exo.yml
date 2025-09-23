@@ -1,0 +1,33 @@
+version: "3.9"
+
+services:
+  exo:
+    image: exoplatform/exo-community:7.0
+    restart: unless-stopped
+    ports:
+      - "8082:8080"
+    environment:
+      - EXO_DB_TYPE=postgres
+      - EXO_DB_HOST=exo-db
+      - EXO_DB_NAME=exoplatform
+      - EXO_DB_USER=exo
+      - EXO_DB_PASSWORD=exopass
+      - EXO_ADDONS_LIST=exo-chat:1.3.6
+    depends_on:
+      - exo-db
+    volumes:
+      - exo-data:/srv/exo
+
+  exo-db:
+    image: postgres:14-alpine
+    restart: unless-stopped
+    environment:
+      - POSTGRES_DB=exoplatform
+      - POSTGRES_USER=exo
+      - POSTGRES_PASSWORD=exopass
+    volumes:
+      - exo-db:/var/lib/postgresql/data
+
+volumes:
+  exo-data:
+  exo-db:

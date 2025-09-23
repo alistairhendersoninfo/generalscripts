@@ -1,0 +1,4 @@
+image: codercom/code-server:4.91.1
+service:
+  port: 8081
+resources: {}

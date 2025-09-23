@@ -1,0 +1,4 @@
+image: bookwyrm/bookwyrm:production
+service:
+  port: 8103
+resources: {}

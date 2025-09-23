@@ -1,0 +1,17 @@
+# Notes: Needs MySQL-compatible database.
+services:
+  framadate:
+    image: framasoft/framadate:latest
+    container_name: framadate
+    restart: unless-stopped
+    ports:
+      - "8081:8081"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

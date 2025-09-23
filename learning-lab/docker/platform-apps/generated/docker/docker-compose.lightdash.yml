@@ -1,0 +1,17 @@
+# Notes: Postgres credentials should point at the lab Postgres service.
+services:
+  lightdash:
+    image: lightdash/lightdash:0.520.0
+    container_name: lightdash
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

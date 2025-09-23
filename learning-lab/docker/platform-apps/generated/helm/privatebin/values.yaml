@@ -1,0 +1,4 @@
+image: privatebin/nginx-fpm-alpine:1.6.2
+service:
+  port: 8085
+resources: {}

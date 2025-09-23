@@ -1,0 +1,4 @@
+image: goharbor/harbor-core:v2.10.0
+service:
+  port: 8443
+resources: {}

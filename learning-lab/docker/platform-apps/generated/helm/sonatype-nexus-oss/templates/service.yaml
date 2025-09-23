@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "sonatype-nexus-oss.fullname" . }}
+  labels:
+    {{- include "sonatype-nexus-oss.labels" . | nindent 4 }}
+spec:
+  type: ClusterIP
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: {{ .Values.service.port }}
+      protocol: TCP
+      name: http
+  selector:
+    {{- include "sonatype-nexus-oss.selectorLabels" . | nindent 4 }}

@@ -1,0 +1,44 @@
+version: "3.9"
+
+services:
+  mautic:
+    image: mautic/mautic:v4-apache
+    restart: unless-stopped
+    ports:
+      - "80810:80"
+    environment:
+      - MAUTIC_DB_HOST=mautic-db
+      - MAUTIC_DB_USER=mautic
+      - MAUTIC_DB_PASSWORD=mautic
+      - MAUTIC_DB_NAME=mautic
+      - MAUTIC_TRUSTED_PROXIES=0.0.0.0/0
+      - MAUTIC_ADMIN_EMAIL=admin@localhost
+      - MAUTIC_ADMIN_PASSWORD=Admin123!
+    volumes:
+      - mautic-data:/var/www/html
+    depends_on:
+      - mautic-db
+      - mautic-redis
+
+  mautic-db:
+    image: mariadb:10.6
+    restart: unless-stopped
+    environment:
+      - MYSQL_ROOT_PASSWORD=mautic
+      - MYSQL_DATABASE=mautic
+      - MYSQL_USER=mautic
+      - MYSQL_PASSWORD=mautic
+    volumes:
+      - mautic-db:/var/lib/mysql
+
+  mautic-redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    command: redis-server --appendonly yes
+    volumes:
+      - mautic-redis:/data
+
+volumes:
+  mautic-data:
+  mautic-db:
+  mautic-redis:

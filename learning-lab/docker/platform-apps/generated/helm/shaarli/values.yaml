@@ -1,0 +1,4 @@
+image: shaarli/shaarli:2024.02.2
+service:
+  port: 8083
+resources: {}

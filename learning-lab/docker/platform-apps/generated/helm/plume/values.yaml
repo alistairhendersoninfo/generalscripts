@@ -1,0 +1,4 @@
+image: plumeorg/plume:0.7.2
+service:
+  port: 8106
+resources: {}

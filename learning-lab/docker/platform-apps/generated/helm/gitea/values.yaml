@@ -1,0 +1,4 @@
+image: gitea/gitea:1.21.6
+service:
+  port: 3000
+resources: {}

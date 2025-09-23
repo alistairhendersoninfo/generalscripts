@@ -1,0 +1,4 @@
+image: odoo:17.0
+service:
+  port: 8069
+resources: {}

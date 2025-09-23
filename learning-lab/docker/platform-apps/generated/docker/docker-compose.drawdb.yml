@@ -1,0 +1,17 @@
+# Notes: SQLite backed schema designer.
+services:
+  drawdb:
+    image: awesomedata/drawdb:latest
+    container_name: drawdb
+    restart: unless-stopped
+    ports:
+      - "3009:3009"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

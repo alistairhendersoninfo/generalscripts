@@ -1,0 +1,17 @@
+# Notes: Configure Postgres backend via LD_DB_* variables.
+services:
+  linkding:
+    image: sissbruecker/linkding:1.27.0
+    container_name: linkding
+    restart: unless-stopped
+    ports:
+      - "9090:9090"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

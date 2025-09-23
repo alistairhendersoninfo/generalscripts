@@ -1,0 +1,4 @@
+image: quay.io/hedgedoc/hedgedoc:1.9.9
+service:
+  port: 8090
+resources: {}

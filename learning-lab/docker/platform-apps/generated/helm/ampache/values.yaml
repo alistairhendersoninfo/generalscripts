@@ -1,0 +1,4 @@
+image: ampache/ampache:6.3.0
+service:
+  port: 8100
+resources: {}

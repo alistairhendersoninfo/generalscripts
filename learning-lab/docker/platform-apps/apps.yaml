@@ -1,0 +1,573 @@
+apps:
+  - name: Apache Superset
+    image: apache/superset:3.1.0
+    ports: [8088]
+    notes: Requires Postgres and Redis; defaults target the shared lab core stack.
+  - name: Metabase
+    image: metabase/metabase:v0.49.11
+    ports: [3000]
+    notes: Connect MB_DB_* environment variables to the shared Postgres instance.
+  - name: Redash
+    image: redash/redash:10.1.0.b50633
+    ports: [5000]
+    notes: Needs Postgres and Redis plus a worker container.
+  - name: Lightdash
+    image: lightdash/lightdash:0.520.0
+    ports: [8080]
+    notes: Postgres credentials should point at the lab Postgres service.
+  - name: OpenSearch Dashboards
+    image: opensearchproject/opensearch-dashboards:2.12.0
+    ports: [5601]
+    notes: Pair with an OpenSearch single-node service for testing.
+  - name: PostHog
+    image: posthog/posthog:latest
+    ports: [8000]
+    notes: Depends on Postgres, Redis, ClickHouse, Kafka, and Zookeeper.
+  - name: Countly
+    image: countly/countly-server:22.06
+    ports: [80]
+    notes: Bundled MongoDB dependency recommended for demos.
+  - name: Open Web Analytics
+    image: openwebanalytics/owa:1.7.6
+    ports: [8081]
+    notes: Requires a MySQL-compatible database.
+  - name: Ackee
+    image: electerious/ackee:3.5.0
+    ports: [3001]
+    notes: Uses MongoDB backend.
+  - name: Shynet
+    image: milesmcc/shynet:latest
+    ports: [8082]
+    notes: Requires Postgres and Redis.
+  - name: Offen
+    image: offen/docker:23.2.0
+    ports: [9877]
+    notes: Uses internal SQLite by default.
+  - name: ReportServer
+    image: aditosoftware/reportserver:4.8
+    ports: [8083]
+    notes: Configure Postgres connection details.
+  - name: NocoDB
+    image: nocodb/nocodb:0.204.7
+    ports: [8084]
+    notes: Works with Postgres, MySQL, or SQL Server; Postgres recommended.
+  - name: Baserow
+    image: baserow/baserow:1.21.1
+    ports: [8085]
+    notes: Requires Postgres and Redis.
+  - name: Directus
+    image: directus/directus:10.8.3
+    ports: [8055]
+    notes: Supports SQLite, Postgres, or MySQL; Postgres recommended.
+  - name: KeystoneJS
+    image: ghcr.io/keystonejs/keystone:6.0.2
+    ports: [3002]
+    notes: Configure DATABASE_URL to Postgres.
+  - name: Payload CMS
+    image: payloadcms/payload:latest
+    ports: [3003]
+    notes: Requires MongoDB connection string.
+  - name: Backstage
+    image: ghcr.io/backstage/backstage:1.24.0
+    ports: [7007]
+    notes: Configure app-config to use Postgres backend.
+  - name: Hoppscotch
+    image: hoppscotch/hoppscotch:latest
+    ports: [3004]
+    notes: Ships as a stateless web UI.
+  - name: Gravitee API Management
+    image: graviteeio/apim-management-ui:4.4.0
+    ports: [8086]
+    notes: Pair with Gravitee gateway, API, MongoDB, and Elasticsearch services.
+  - name: Apiman
+    image: apiman/on-wildfly:3.0.0.Final
+    ports: [8087]
+    notes: Requires Postgres JDBC datasource.
+  - name: Hasura GraphQL Engine
+    image: hasura/graphql-engine:v2.40.0
+    ports: [8088]
+    notes: Connect HASURA_GRAPHQL_DATABASE_URL to Postgres and set an admin secret.
+  - name: Appwrite
+    image: appwrite/appwrite:1.5.3
+    ports: [8089]
+    notes: Bundles MariaDB, Redis, and InfluxDB dependencies.
+  - name: Supabase
+    image: supabase/postgres:15.1.0.68
+    ports: [5433]
+    notes: Compose demo should include the Supabase meta services (studio, gotrue, realtime).
+  - name: Parse Platform
+    image: parseplatform/parse-server:6.4.0
+    ports: [1337]
+    notes: Requires MongoDB and optionally the Parse dashboard UI.
+  - name: Konga
+    image: pantsel/konga:latest
+    ports: [1338]
+    notes: Configure Postgres backend for persistent storage.
+  - name: Wiki.js
+    image: requarks/wiki:2.5.301
+    ports: [3005]
+    notes: Works best with Postgres database.
+  - name: XWiki
+    image: xwiki:lts-postgres-tomcat
+    ports: [8080]
+    notes: Includes Tomcat and Postgres inside container.
+  - name: MediaWiki
+    image: mediawiki:1.41
+    ports: [8087]
+    notes: Requires MariaDB or MySQL database.
+  - name: DokuWiki
+    image: linuxserver/dokuwiki:latest
+    ports: [8088]
+    notes: Flat-file storage; mount config volume.
+  - name: TiddlyWiki
+    image: tiddlywiki:5.3.2
+    ports: [8089]
+    notes: Stateless wiki server; persist by mounting volume.
+  - name: HedgeDoc
+    image: quay.io/hedgedoc/hedgedoc:1.9.9
+    ports: [8090]
+    notes: Requires Postgres and Redis configuration.
+  - name: Etherpad
+    image: etherpad/etherpad:1.9.7
+    ports: [8091]
+    notes: Supports Postgres, MySQL, or dirtyDB; production uses Postgres.
+  - name: Trilium Notes
+    image: zadam/trilium:0.63.5
+    ports: [8092]
+    notes: Persist /home/node/trilium-data volume.
+  - name: Paperless-ngx
+    image: ghcr.io/paperless-ngx/paperless-ngx:2.7.2
+    ports: [8093]
+    notes: Requires Postgres and Redis; mount data and media directories.
+  - name: Docspell
+    image: eikek0/docspell-restserver:23.3.0
+    ports: [7880]
+    notes: Needs Postgres and Elasticsearch services.
+  - name: Mayan EDMS
+    image: mayanedms/mayanedms:4.5
+    ports: [8094]
+    notes: Requires Postgres and Redis containers.
+  - name: Penpot
+    image: penpotapp/backend:2.1.1
+    ports: [8095]
+    notes: Deploy with the companion frontend plus Postgres and Redis.
+  - name: Excalidraw
+    image: excalidraw/excalidraw:latest
+    ports: [3006]
+    notes: Stateless collaborative whiteboard demo.
+  - name: tldraw
+    image: ghcr.io/tldraw/tldraw:1.0.1
+    ports: [3007]
+    notes: Provide TLS termination via lab nginx master as needed.
+  - name: diagrams.net
+    image: jgraph/drawio:23.0.4
+    ports: [3008]
+    notes: Self-hosted diagrams.net instance.
+  - name: DrawDB
+    image: awesomedata/drawdb:latest
+    ports: [3009]
+    notes: SQLite backed schema designer.
+  - name: PhotoPrism
+    image: photoprism/photoprism:20240330
+    ports: [2342]
+    notes: Requires MariaDB; mount originals storage.
+  - name: LibrePhotos
+    image: reallibrephotos/librephotos:2024.03.03
+    ports: [3010]
+    notes: Needs Postgres and Redis plus Redis worker.
+  - name: Piwigo
+    image: linuxserver/piwigo:latest
+    ports: [3011]
+    notes: Requires MariaDB; mount config and gallery volumes.
+  - name: Lychee
+    image: lycheeorg/lychee:latest
+    ports: [3012]
+    notes: Needs MariaDB credentials.
+  - name: Photoview
+    image: viktorstrate/photoview:latest
+    ports: [3013]
+    notes: Supports Postgres or MySQL; Postgres recommended.
+  - name: MediaGoblin
+    image: quay.io/mediagoblin/mediagoblin:0.12.0
+    ports: [3014]
+    notes: Requires Postgres and Redis.
+  - name: ResourceSpace
+    image: mondora/resourcespace:10.2
+    ports: [3015]
+    notes: Requires MariaDB backend.
+  - name: Pimcore
+    image: pimcore/pimcore:11.1.0-apache
+    ports: [3016]
+    notes: Requires MariaDB and Redis connections.
+  - name: PeerTube
+    image: chocobozzz/peertube:6.1.0
+    ports: [9000]
+    notes: Depends on Postgres and Redis.
+  - name: Owncast
+    image: owncast/owncast:0.1.3
+    ports: [8096]
+    notes: Stateless streaming server; persist /app/data.
+  - name: Open Streaming Platform
+    image: opensourcepos/osp:0.9.4
+    ports: [8097]
+    notes: Requires MariaDB.
+  - name: MediaCMS
+    image: mediacms/mediacms:latest
+    ports: [8098]
+    notes: Depends on Postgres, Redis, and MinIO/S3 storage.
+  - name: Tube Archivist
+    image: bbilly1/tubearchivist:latest
+    ports: [8000]
+    notes: Requires Elasticsearch and Redis.
+  - name: Jellyfin
+    image: jellyfin/jellyfin:10.8.13
+    ports: [8099]
+    notes: Mount config and cache volumes plus media libraries.
+  - name: Navidrome
+    image: deluan/navidrome:0.50.2
+    ports: [4533]
+    notes: Supports Postgres, MySQL, or SQLite; Postgres recommended.
+  - name: Funkwhale
+    image: thetarkus/funkwhale:1.4.0
+    ports: [8536]
+    notes: Requires Postgres and Redis.
+  - name: Ampache
+    image: ampache/ampache:6.3.0
+    ports: [8100]
+    notes: Needs MariaDB database and persistent volumes.
+  - name: Airsonic-Advanced
+    image: airsonicadvanced/airsonic-advanced:11.0.0
+    ports: [4040]
+    notes: Mount config, podcasts, and media directories.
+  - name: Calibre-Web
+    image: linuxserver/calibre-web:latest
+    ports: [8083]
+    notes: Requires access to Calibre library path.
+  - name: Komga
+    image: gotson/komga:1.5.1
+    ports: [25600]
+    notes: Mount config and media volumes.
+  - name: Kavita
+    image: kizaing/kavita:0.7.3
+    ports: [5000]
+    notes: Persist config and library directories.
+  - name: Discourse
+    image: bitnami/discourse:3.2.2
+    ports: [8101]
+    notes: Requires Postgres and Redis; SMTP optional.
+  - name: Flarum
+    image: mondedie/flarum:1.8.1
+    ports: [8102]
+    notes: Needs MariaDB database.
+  - name: NodeBB
+    image: nodebb/docker:latest
+    ports: [4567]
+    notes: Requires MongoDB and Redis.
+  - name: Bookwyrm
+    image: bookwyrm/bookwyrm:production
+    ports: [8103]
+    notes: Depends on Postgres and Redis.
+  - name: Lemmy
+    image: dessalines/lemmy:0.19.3
+    ports: [1236]
+    notes: Requires Postgres and includes pictrs plus UI services.
+  - name: Kbin
+    image: ernado/kbin:0.11.1
+    ports: [8104]
+    notes: Needs Postgres and Redis plus optional worker service.
+  - name: WriteFreely
+    image: writeas/writefreely:latest
+    ports: [8105]
+    notes: Requires MySQL or Postgres; MariaDB recommended for demos.
+  - name: Plume
+    image: plumeorg/plume:0.7.2
+    ports: [8106]
+    notes: Uses Postgres database.
+  - name: Zammad
+    image: zammad/zammad:6.3.0
+    ports: [8085]
+    notes: Requires Postgres, Redis, and Elasticsearch.
+  - name: GLPI
+    image: diouxx/glpi:10.0.12
+    ports: [8086]
+    notes: Needs MariaDB database.
+  - name: osTicket
+    image: osticket/osticket:1.18
+    ports: [8087]
+    notes: Requires MariaDB or MySQL backend.
+  - name: FreeScout
+    image: tiredofit/freescout:1.12.1
+    ports: [8088]
+    notes: Needs MariaDB database.
+  - name: UVDesk
+    image: uvdesk/helpdesk:1.0.19
+    ports: [8089]
+    notes: Requires MySQL-compatible database.
+  - name: Snipe-IT
+    image: snipe/snipe-it:6.4.2
+    ports: [8090]
+    notes: Requires MySQL or MariaDB database.
+  - name: ERPNext
+    image: frappe/erpnext-worker:version-14
+    ports: [8002]
+    notes: Deploy alongside nginx, redis, and MariaDB containers per official docker-compose.
+  - name: Dolibarr
+    image: tuxgasy/dolibarr:17.0.3
+    ports: [8091]
+    notes: Needs MariaDB database.
+  - name: Odoo Community
+    image: odoo:17.0
+    ports: [8069]
+    notes: Requires Postgres database.
+  - name: Tryton
+    image: tryton/tryton:7.2
+    ports: [8000]
+    notes: Connect to Postgres for persistence.
+  - name: EspoCRM
+    image: espocrm/espocrm:8.3.4
+    ports: [8092]
+    notes: Requires MariaDB and Elasticsearch.
+  - name: SuiteCRM
+    image: bitnami/suitecrm:8.6.2
+    ports: [8093]
+    notes: Needs MariaDB database.
+  - name: Corteza
+    image: cortezaproject/corteza:2023.9
+    ports: [18080]
+    notes: Requires Postgres and Redis.
+  - name: Monica
+    image: monica:latest
+    ports: [8094]
+    notes: Configure Postgres connection.
+  - name: Gitea
+    image: gitea/gitea:1.21.6
+    ports: [3000, 2222]
+    notes: Supports Postgres, MariaDB, or SQLite; Postgres recommended.
+  - name: Forgejo
+    image: codeberg.org/forgejo/forgejo:1.21.7-0
+    ports: [3001]
+    notes: Configure Postgres backend.
+  - name: Jenkins
+    image: jenkins/jenkins:lts-jdk17
+    ports: [8080]
+    notes: Mount /var/jenkins_home volume.
+  - name: Woodpecker CI
+    image: woodpeckerci/woodpecker-server:v2.0.1
+    ports: [8001]
+    notes: Requires Postgres database and agent service.
+  - name: Drone CI
+    image: drone/drone:2
+    ports: [8081]
+    notes: Requires Postgres database and RPC secret.
+  - name: Harbor
+    image: goharbor/harbor-core:v2.10.0
+    ports: [8443]
+    notes: Deploy alongside Harbor portal, registry, database, redis, and jobservice containers.
+  - name: Sonatype Nexus OSS
+    image: sonatype/nexus3:3.68.1
+    ports: [8082]
+    notes: Mount /nexus-data for persistence.
+  - name: Verdaccio
+    image: verdaccio/verdaccio:6.0
+    ports: [4873]
+    notes: Lightweight npm proxy; mount storage volume.
+  - name: ChartMuseum
+    image: chartmuseum/chartmuseum:v0.14.0
+    ports: [8087]
+    notes: Configure S3-compatible storage such as MinIO.
+  - name: Portainer
+    image: portainer/portainer-ce:2.19.4
+    ports: [9443]
+    notes: Mount /data volume and map Docker socket in compose.
+  - name: Rancher
+    image: rancher/rancher:latest
+    ports: [9080]
+    notes: Requires privileged access for docker socket.
+  - name: Keycloak
+    image: quay.io/keycloak/keycloak:24.0.4
+    ports: [8080]
+    notes: Use start-dev for demos; configure Postgres credentials.
+  - name: authentik
+    image: ghcr.io/goauthentik/server:2024.3.1
+    ports: [9000]
+    notes: Requires Postgres and Redis.
+  - name: Authelia
+    image: authelia/authelia:4.38.8
+    ports: [9091]
+    notes: Needs Postgres storage and Redis session backend.
+  - name: ZITADEL
+    image: ghcr.io/zitadel/zitadel:2.48.0
+    ports: [8081]
+    notes: Configure Postgres connection string.
+  - name: Grafana
+    image: grafana/grafana:10.4.1
+    ports: [3000]
+    notes: Optional Postgres database for state.
+  - name: Prometheus
+    image: prom/prometheus:v2.51.0
+    ports: [9090]
+    notes: Mount config and data directories.
+  - name: VictoriaMetrics
+    image: victoriametrics/victoria-metrics:v1.101.0
+    ports: [8428]
+    notes: Ingest and query endpoints share same port.
+  - name: Uptime Kuma
+    image: louislam/uptime-kuma:1.23.7
+    ports: [3001]
+    notes: Mount /app/data for persistence.
+  - name: Statping-ng
+    image: statping-ng/statping-ng:latest
+    ports: [8082]
+    notes: Supports Postgres or MySQL backends; Postgres recommended.
+  - name: Healthchecks
+    image: healthchecks/healthchecks:2.4
+    ports: [8000]
+    notes: Configure SECRET_KEY and Postgres connection.
+  - name: Netdata
+    image: netdata/netdata:stable
+    ports: [19999]
+    notes: Requires SYS_PTRACE capability and host metrics mounts.
+  - name: Zabbix
+    image: zabbix/zabbix-server-pgsql:7.0-ubuntu
+    ports: [10051]
+    notes: Pair with Zabbix web container and Postgres database.
+  - name: LibreNMS
+    image: librenms/librenms:23.12.0
+    ports: [8095]
+    notes: Requires MariaDB, Memcached, and RRDCached.
+  - name: ntopng Community
+    image: ntop/ntopng:5.8
+    ports: [3002]
+    notes: Needs NET_ADMIN capability and optionally PF_RING.
+  - name: GlitchTip
+    image: glitchtip/glitchtip:3.2.2
+    ports: [9000]
+    notes: Requires Postgres and Redis.
+  - name: Wazuh
+    image: wazuh/wazuh-dashboard:4.7.2
+    ports: [5602]
+    notes: Bundle manager, filebeat, and OpenSearch containers for full stack.
+  - name: SearxNG
+    image: searxng/searxng:2024.04.22-16c45362
+    ports: [8080]
+    notes: Stateless metasearch; tune settings.yml as needed.
+  - name: Whoogle
+    image: benbusby/whoogle-search:latest
+    ports: [5000]
+    notes: Stateless Google search proxy.
+  - name: Shaarli
+    image: shaarli/shaarli:2024.02.2
+    ports: [8083]
+    notes: Persist /var/www/shaarli/data volume.
+  - name: Linkding
+    image: sissbruecker/linkding:1.27.0
+    ports: [9090]
+    notes: Configure Postgres backend via LD_DB_* variables.
+  - name: LinkAce
+    image: linkace/linkace:1.12.2
+    ports: [8094]
+    notes: Requires MariaDB database.
+  - name: Kutt
+    image: kutt/kutt:latest
+    ports: [8000]
+    notes: Requires Postgres and Redis; set JWT and API secrets.
+  - name: YOURLS
+    image: yourls:1.9.2
+    ports: [8084]
+    notes: Needs MySQL or MariaDB database and YOURLS_SITE variable.
+  - name: PrivateBin
+    image: privatebin/nginx-fpm-alpine:1.6.2
+    ports: [8085]
+    notes: Stateless encrypted pastebin; mount data volume.
+  - name: FreshRSS
+    image: freshrss/freshrss:1.22.1
+    ports: [8086]
+    notes: Configure Postgres or MySQL database credentials.
+  - name: Miniflux
+    image: miniflux/miniflux:2.0.49
+    ports: [8087]
+    notes: Requires Postgres database.
+  - name: Tiny Tiny RSS
+    image: cthulhoo/ttrss-fpm-pgsql:2024-04-14
+    ports: [8088]
+    notes: Requires Postgres database and optional nginx frontend.
+  - name: Guacamole
+    image: guacamole/guacamole:1.5.3
+    ports: [8080]
+    notes: Deploy with guacd service and Postgres or MySQL backend.
+  - name: code-server
+    image: codercom/code-server:4.91.1
+    ports: [8081]
+    notes: Mount workspace volume and set PASSWORD.
+  - name: JupyterHub
+    image: jupyterhub/jupyterhub:4.1.5
+    ports: [8000]
+    notes: Configure authenticator and spawner; mount config.
+  - name: RStudio Server
+    image: rocker/rstudio:4.3.3
+    ports: [8787]
+    notes: Set PASSWORD and mount /home/rstudio.
+  - name: Open WebUI
+    image: ghcr.io/open-webui/open-webui:0.2.7
+    ports: [8082]
+    notes: Web UI for local AI models; mount data volume.
+  - name: LibreChat
+    image: ghcr.io/danny-avila/librechat:latest
+    ports: [3080]
+    notes: Requires MongoDB and optional Redis backend.
+  - name: Flowise
+    image: flowiseai/flowise:latest
+    ports: [3000]
+    notes: Configure database connection via FLOWISE_DATABASE_URL.
+  - name: Danswer
+    image: danny-avila/danswer:latest
+    ports: [8083]
+    notes: Requires Postgres, Elasticsearch/OpenSearch, and optional Redis.
+  - name: AnythingLLM
+    image: mintplexlabs/anything-llm:latest
+    ports: [3000]
+    notes: Supports SQLite out of the box; Postgres recommended for scale.
+  - name: Quivr
+    image: quivr/quivr:latest
+    ports: [3001]
+    notes: Needs Postgres, Redis, and a vector store.
+  - name: LimeSurvey
+    image: lscr.io/linuxserver/limesurvey:6.5.10
+    ports: [8080]
+    notes: Requires MariaDB or Postgres database.
+  - name: OhMyForm
+    image: ohmyform/ohmyform:1.1.0
+    ports: [5000]
+    notes: Requires Postgres database.
+  - name: Formbricks
+    image: ghcr.io/formbricks/formbricks:1.6.0
+    ports: [3002]
+    notes: Requires Postgres and Redis.
+  - name: Framadate
+    image: framasoft/framadate:latest
+    ports: [8081]
+    notes: Needs MySQL-compatible database.
+  - name: CVAT
+    image: openvinotoolkit/cvat-server:2.13.0
+    ports: [8080]
+    notes: Requires Postgres, Redis, and worker containers.
+  - name: Label Studio
+    image: heartexlabs/label-studio:1.11.0
+    ports: [8082]
+    notes: Supports SQLite for demos; Postgres recommended.
+  - name: Frigate
+    image: blakeblackshear/frigate:0.13.0
+    ports: [8978]
+    notes: Requires shared memory and hardware acceleration configuration.
+  - name: Kerberos.io
+    image: kerberos/kerberos:3.5.0
+    ports: [8081]
+    notes: Mount recordings volume for footage.
+  - name: MotionEye
+    image: ccrisan/motioneye:master-amd64
+    ports: [8765]
+    notes: Requires camera device passthrough.
+  - name: MinIO
+    image: minio/minio:RELEASE.2024-03-30T00-08-50Z
+    ports: [9000, 9001]
+    notes: Shared object storage service across the lab.

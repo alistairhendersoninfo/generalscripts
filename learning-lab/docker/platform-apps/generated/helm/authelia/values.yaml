@@ -1,0 +1,4 @@
+image: authelia/authelia:4.38.8
+service:
+  port: 9091
+resources: {}

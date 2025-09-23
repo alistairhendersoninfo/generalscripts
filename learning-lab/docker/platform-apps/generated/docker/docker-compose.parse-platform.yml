@@ -1,0 +1,17 @@
+# Notes: Requires MongoDB and optionally the Parse dashboard UI.
+services:
+  parse-platform:
+    image: parseplatform/parse-server:6.4.0
+    container_name: parse-platform
+    restart: unless-stopped
+    ports:
+      - "1337:1337"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

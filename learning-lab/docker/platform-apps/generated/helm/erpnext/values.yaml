@@ -1,0 +1,4 @@
+image: frappe/erpnext-worker:version-14
+service:
+  port: 8002
+resources: {}

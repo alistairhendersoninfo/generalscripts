@@ -1,0 +1,17 @@
+# Notes: Requires MySQL or MariaDB database.
+services:
+  snipe-it:
+    image: snipe/snipe-it:6.4.2
+    container_name: snipe-it
+    restart: unless-stopped
+    ports:
+      - "8090:8090"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

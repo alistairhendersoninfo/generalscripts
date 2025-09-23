@@ -1,0 +1,4 @@
+image: hasura/graphql-engine:v2.40.0
+service:
+  port: 8088
+resources: {}

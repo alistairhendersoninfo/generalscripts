@@ -1,0 +1,28 @@
+version: "3.9"
+
+services:
+  listmonk:
+    image: listmonk/listmonk:latest
+    restart: unless-stopped
+    command: ["./listmonk", "--config", "/config/config.toml", "--install"]
+    volumes:
+      - ./listmonk/config.toml:/config/config.toml
+      - listmonk-data:/listmonk/uploads
+    ports:
+      - "9001:9001"
+    depends_on:
+      - listmonk-db
+
+  listmonk-db:
+    image: postgres:15-alpine
+    restart: unless-stopped
+    environment:
+      - POSTGRES_DB=listmonk
+      - POSTGRES_USER=listmonk
+      - POSTGRES_PASSWORD=listmonk
+    volumes:
+      - listmonk-db:/var/lib/postgresql/data
+
+volumes:
+  listmonk-data:
+  listmonk-db:

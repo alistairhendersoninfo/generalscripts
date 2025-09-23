@@ -1,0 +1,4 @@
+image: linuxserver/dokuwiki:latest
+service:
+  port: 8088
+resources: {}

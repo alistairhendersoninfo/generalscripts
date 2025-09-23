@@ -1,0 +1,4 @@
+image: pantsel/konga:latest
+service:
+  port: 1338
+resources: {}

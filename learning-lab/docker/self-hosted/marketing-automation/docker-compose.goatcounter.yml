@@ -1,0 +1,18 @@
+version: "3.9"
+
+services:
+  goatcounter:
+    image: zgoat/goatcounter:2.4.0
+    restart: unless-stopped
+    environment:
+      - GC__HOST=localhost:80818
+      - GC__EMAIL=admin@localhost
+      - GC__PASSWORD=Admin123!
+      - GC__DB=sqlite
+    ports:
+      - "80818:8080"
+    volumes:
+      - goatcounter-data:/srv/goatcounter
+
+volumes:
+  goatcounter-data:

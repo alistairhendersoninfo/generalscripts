@@ -1,0 +1,4 @@
+image: appwrite/appwrite:1.5.3
+service:
+  port: 8089
+resources: {}

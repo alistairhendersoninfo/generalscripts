@@ -1,0 +1,17 @@
+# Notes: Requires MariaDB and Redis connections.
+services:
+  pimcore:
+    image: pimcore/pimcore:11.1.0-apache
+    container_name: pimcore
+    restart: unless-stopped
+    ports:
+      - "3016:3016"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

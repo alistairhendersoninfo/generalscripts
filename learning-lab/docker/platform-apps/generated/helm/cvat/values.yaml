@@ -1,0 +1,4 @@
+image: openvinotoolkit/cvat-server:2.13.0
+service:
+  port: 8080
+resources: {}

@@ -1,0 +1,54 @@
+version: "3.9"
+
+services:
+  airflow-postgres:
+    image: postgres:15-alpine
+    restart: unless-stopped
+    environment:
+      - POSTGRES_DB=airflow
+      - POSTGRES_USER=airflow
+      - POSTGRES_PASSWORD=airflow
+    volumes:
+      - airflow-postgres:/var/lib/postgresql/data
+
+  airflow-redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+
+  airflow-webserver:
+    image: apache/airflow:2.9.0
+    restart: unless-stopped
+    depends_on:
+      - airflow-postgres
+      - airflow-redis
+    environment:
+      - AIRFLOW__CORE__EXECUTOR=CeleryExecutor
+      - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@airflow-postgres:5432/airflow
+      - AIRFLOW__CELERY__BROKER_URL=redis://airflow-redis:6379/0
+      - _AIRFLOW_WWW_USER_USERNAME=admin
+      - _AIRFLOW_WWW_USER_PASSWORD=Admin123!
+    ports:
+      - "80824:8080"
+    command: webserver
+    volumes:
+      - airflow-dags:/opt/airflow/dags
+      - airflow-logs:/opt/airflow/logs
+
+  airflow-scheduler:
+    image: apache/airflow:2.9.0
+    restart: unless-stopped
+    depends_on:
+      - airflow-webserver
+    command: scheduler
+    environment:
+      - AIRFLOW__CORE__EXECUTOR=CeleryExecutor
+      - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@airflow-postgres:5432/airflow
+      - AIRFLOW__CELERY__BROKER_URL=redis://airflow-redis:6379/0
+    volumes:
+      - airflow-dags:/opt/airflow/dags
+      - airflow-logs:/opt/airflow/logs
+
+volumes:
+  airflow-postgres:
+  airflow-dags:
+  airflow-logs:

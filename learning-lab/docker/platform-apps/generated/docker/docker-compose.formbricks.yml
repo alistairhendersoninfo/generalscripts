@@ -1,0 +1,17 @@
+# Notes: Requires Postgres and Redis.
+services:
+  formbricks:
+    image: ghcr.io/formbricks/formbricks:1.6.0
+    container_name: formbricks
+    restart: unless-stopped
+    ports:
+      - "3002:3002"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

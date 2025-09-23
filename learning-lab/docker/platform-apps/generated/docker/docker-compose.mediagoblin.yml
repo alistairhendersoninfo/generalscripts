@@ -1,0 +1,17 @@
+# Notes: Requires Postgres and Redis.
+services:
+  mediagoblin:
+    image: quay.io/mediagoblin/mediagoblin:0.12.0
+    container_name: mediagoblin
+    restart: unless-stopped
+    ports:
+      - "3014:3014"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

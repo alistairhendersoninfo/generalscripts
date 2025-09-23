@@ -1,0 +1,17 @@
+# Notes: Depends on Postgres and Redis.
+services:
+  bookwyrm:
+    image: bookwyrm/bookwyrm:production
+    container_name: bookwyrm
+    restart: unless-stopped
+    ports:
+      - "8103:8103"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

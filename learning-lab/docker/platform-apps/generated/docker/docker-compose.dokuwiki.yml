@@ -1,0 +1,17 @@
+# Notes: Flat-file storage; mount config volume.
+services:
+  dokuwiki:
+    image: linuxserver/dokuwiki:latest
+    container_name: dokuwiki
+    restart: unless-stopped
+    ports:
+      - "8088:8088"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

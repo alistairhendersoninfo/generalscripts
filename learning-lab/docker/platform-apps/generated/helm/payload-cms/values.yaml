@@ -1,0 +1,4 @@
+image: payloadcms/payload:latest
+service:
+  port: 3003
+resources: {}

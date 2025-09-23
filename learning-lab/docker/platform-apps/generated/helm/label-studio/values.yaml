@@ -1,0 +1,4 @@
+image: heartexlabs/label-studio:1.11.0
+service:
+  port: 8082
+resources: {}

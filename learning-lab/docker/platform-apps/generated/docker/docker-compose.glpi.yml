@@ -1,0 +1,17 @@
+# Notes: Needs MariaDB database.
+services:
+  glpi:
+    image: diouxx/glpi:10.0.12
+    container_name: glpi
+    restart: unless-stopped
+    ports:
+      - "8086:8086"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

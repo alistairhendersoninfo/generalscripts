@@ -1,0 +1,17 @@
+# Notes: Requires MySQL-compatible database.
+services:
+  uvdesk:
+    image: uvdesk/helpdesk:1.0.19
+    container_name: uvdesk
+    restart: unless-stopped
+    ports:
+      - "8089:8089"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

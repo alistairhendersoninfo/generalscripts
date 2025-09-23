@@ -1,0 +1,4 @@
+image: quivr/quivr:latest
+service:
+  port: 3001
+resources: {}

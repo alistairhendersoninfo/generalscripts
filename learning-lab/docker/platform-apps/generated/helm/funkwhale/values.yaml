@@ -1,0 +1,4 @@
+image: thetarkus/funkwhale:1.4.0
+service:
+  port: 8536
+resources: {}

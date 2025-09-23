@@ -1,0 +1,17 @@
+# Notes: Lightweight npm proxy; mount storage volume.
+services:
+  verdaccio:
+    image: verdaccio/verdaccio:6.0
+    container_name: verdaccio
+    restart: unless-stopped
+    ports:
+      - "4873:4873"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

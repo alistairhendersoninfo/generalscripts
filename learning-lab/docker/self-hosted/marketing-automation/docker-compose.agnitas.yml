@@ -1,0 +1,34 @@
+version: "3.9"
+
+services:
+  agnitas:
+    image: agnitas/emm-ce:2020
+    restart: unless-stopped
+    ports:
+      - "80813:8080"
+    environment:
+      - DB_HOST=agnitas-db
+      - DB_NAME=emm
+      - DB_USER=emm
+      - DB_PASSWORD=emm
+      - ADMIN_EMAIL=admin@localhost
+      - ADMIN_PASSWORD=Admin123!
+    depends_on:
+      - agnitas-db
+    volumes:
+      - agnitas-data:/opt/openemm
+
+  agnitas-db:
+    image: mariadb:10.6
+    restart: unless-stopped
+    environment:
+      - MYSQL_ROOT_PASSWORD=emm
+      - MYSQL_DATABASE=emm
+      - MYSQL_USER=emm
+      - MYSQL_PASSWORD=emm
+    volumes:
+      - agnitas-db:/var/lib/mysql
+
+volumes:
+  agnitas-data:
+  agnitas-db:

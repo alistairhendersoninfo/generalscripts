@@ -1,0 +1,17 @@
+# Notes: Bundled MongoDB dependency recommended for demos.
+services:
+  countly:
+    image: countly/countly-server:22.06
+    container_name: countly
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

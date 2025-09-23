@@ -1,0 +1,4 @@
+image: photoprism/photoprism:20240330
+service:
+  port: 2342
+resources: {}

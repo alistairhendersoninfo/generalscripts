@@ -1,0 +1,17 @@
+# Notes: Needs Postgres and Redis plus Redis worker.
+services:
+  librephotos:
+    image: reallibrephotos/librephotos:2024.03.03
+    container_name: librephotos
+    restart: unless-stopped
+    ports:
+      - "3010:3010"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

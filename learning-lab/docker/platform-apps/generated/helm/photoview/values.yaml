@@ -1,0 +1,4 @@
+image: viktorstrate/photoview:latest
+service:
+  port: 3013
+resources: {}

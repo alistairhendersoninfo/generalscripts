@@ -1,0 +1,17 @@
+# Notes: Requires Elasticsearch and Redis.
+services:
+  tube-archivist:
+    image: bbilly1/tubearchivist:latest
+    container_name: tube-archivist
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

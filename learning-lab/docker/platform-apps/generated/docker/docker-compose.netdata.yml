@@ -1,0 +1,17 @@
+# Notes: Requires SYS_PTRACE capability and host metrics mounts.
+services:
+  netdata:
+    image: netdata/netdata:stable
+    container_name: netdata
+    restart: unless-stopped
+    ports:
+      - "19999:19999"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

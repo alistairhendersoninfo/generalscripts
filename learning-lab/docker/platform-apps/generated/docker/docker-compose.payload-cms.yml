@@ -1,0 +1,17 @@
+# Notes: Requires MongoDB connection string.
+services:
+  payload-cms:
+    image: payloadcms/payload:latest
+    container_name: payload-cms
+    restart: unless-stopped
+    ports:
+      - "3003:3003"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

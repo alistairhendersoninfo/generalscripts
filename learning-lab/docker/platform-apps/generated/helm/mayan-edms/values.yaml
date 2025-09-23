@@ -1,0 +1,4 @@
+image: mayanedms/mayanedms:4.5
+service:
+  port: 8094
+resources: {}

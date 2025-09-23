@@ -1,0 +1,4 @@
+image: lscr.io/linuxserver/limesurvey:6.5.10
+service:
+  port: 8080
+resources: {}

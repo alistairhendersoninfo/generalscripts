@@ -1,0 +1,17 @@
+# Notes: Self-hosted diagrams.net instance.
+services:
+  diagrams-net:
+    image: jgraph/drawio:23.0.4
+    container_name: diagrams-net
+    restart: unless-stopped
+    ports:
+      - "3008:3008"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

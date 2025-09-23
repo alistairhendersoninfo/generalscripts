@@ -1,0 +1,9 @@
+services:
+  downloader:
+    build: .
+    image: learning-lab/datasets-downloader:latest
+    volumes:
+      - ../../datasets/data:/app/data
+    environment:
+      - DATA_ROOT=/app/data
+    restart: "no"

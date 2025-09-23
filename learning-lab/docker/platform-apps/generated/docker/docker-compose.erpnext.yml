@@ -1,0 +1,17 @@
+# Notes: Deploy alongside nginx, redis, and MariaDB containers per official docker-compose.
+services:
+  erpnext:
+    image: frappe/erpnext-worker:version-14
+    container_name: erpnext
+    restart: unless-stopped
+    ports:
+      - "8002:8002"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

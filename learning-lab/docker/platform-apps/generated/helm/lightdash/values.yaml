@@ -1,0 +1,4 @@
+image: lightdash/lightdash:0.520.0
+service:
+  port: 8080
+resources: {}

@@ -1,0 +1,4 @@
+image: woodpeckerci/woodpecker-server:v2.0.1
+service:
+  port: 8001
+resources: {}

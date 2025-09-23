@@ -1,0 +1,4 @@
+image: metabase/metabase:v0.49.11
+service:
+  port: 3000
+resources: {}

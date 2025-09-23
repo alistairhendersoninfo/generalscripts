@@ -1,0 +1,17 @@
+# Notes: Requires Postgres and Redis.
+services:
+  baserow:
+    image: baserow/baserow:1.21.1
+    container_name: baserow
+    restart: unless-stopped
+    ports:
+      - "8085:8085"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

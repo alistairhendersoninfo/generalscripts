@@ -1,0 +1,4 @@
+image: jgraph/drawio:23.0.4
+service:
+  port: 3008
+resources: {}

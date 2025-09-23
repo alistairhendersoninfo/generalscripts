@@ -1,0 +1,4 @@
+image: mediawiki:1.41
+service:
+  port: 8087
+resources: {}

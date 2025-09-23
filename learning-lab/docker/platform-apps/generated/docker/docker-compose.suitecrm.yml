@@ -1,0 +1,17 @@
+# Notes: Needs MariaDB database.
+services:
+  suitecrm:
+    image: bitnami/suitecrm:8.6.2
+    container_name: suitecrm
+    restart: unless-stopped
+    ports:
+      - "8093:8093"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

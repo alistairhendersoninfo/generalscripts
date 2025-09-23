@@ -1,0 +1,17 @@
+# Notes: Needs MySQL or MariaDB database and YOURLS_SITE variable.
+services:
+  yourls:
+    image: yourls:1.9.2
+    container_name: yourls
+    restart: unless-stopped
+    ports:
+      - "8084:8084"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

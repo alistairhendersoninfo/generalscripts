@@ -1,0 +1,17 @@
+# Notes: Mount /data volume and map Docker socket in compose.
+services:
+  portainer:
+    image: portainer/portainer-ce:2.19.4
+    container_name: portainer
+    restart: unless-stopped
+    ports:
+      - "9443:9443"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

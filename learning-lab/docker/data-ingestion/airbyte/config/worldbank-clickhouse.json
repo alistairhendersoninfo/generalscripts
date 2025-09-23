@@ -1,0 +1,25 @@
+{
+  "source": {
+    "name": "WorldBank",
+    "definitionId": "d78cf880-c0a7-4e3b-83b7-4ab1a0eb3226",
+    "configuration": {
+      "indicator": "NY.GDP.PCAP.CD",
+      "country": "USA"
+    }
+  },
+  "destination": {
+    "name": "ClickHouse",
+    "definitionId": "0c5d1b31-c3f2-4c13-9705-95d8f7501ccc",
+    "configuration": {
+      "host": "clickhouse",
+      "port": 9000,
+      "database": "analytics",
+      "username": "analytics",
+      "password": "analytics",
+      "table": "worldbank_gdp_per_capita"
+    }
+  },
+  "schedule": {
+    "type": "manual"
+  }
+}

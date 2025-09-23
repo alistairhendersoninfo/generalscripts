@@ -1,0 +1,17 @@
+# Notes: Deploy alongside Harbor portal, registry, database, redis, and jobservice containers.
+services:
+  harbor:
+    image: goharbor/harbor-core:v2.10.0
+    container_name: harbor
+    restart: unless-stopped
+    ports:
+      - "8443:8443"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

@@ -1,0 +1,4 @@
+image: jellyfin/jellyfin:10.8.13
+service:
+  port: 8099
+resources: {}

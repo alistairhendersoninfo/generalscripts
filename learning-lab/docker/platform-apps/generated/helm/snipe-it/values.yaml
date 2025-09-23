@@ -1,0 +1,4 @@
+image: snipe/snipe-it:6.4.2
+service:
+  port: 8090
+resources: {}

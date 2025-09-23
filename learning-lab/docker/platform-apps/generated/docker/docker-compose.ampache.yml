@@ -1,0 +1,17 @@
+# Notes: Needs MariaDB database and persistent volumes.
+services:
+  ampache:
+    image: ampache/ampache:6.3.0
+    container_name: ampache
+    restart: unless-stopped
+    ports:
+      - "8100:8100"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

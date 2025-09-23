@@ -1,0 +1,17 @@
+# Notes: Requires a MySQL-compatible database.
+services:
+  open-web-analytics:
+    image: openwebanalytics/owa:1.7.6
+    container_name: open-web-analytics
+    restart: unless-stopped
+    ports:
+      - "8081:8081"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

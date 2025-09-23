@@ -1,0 +1,12 @@
+[app]
+address = "0.0.0.0:9001"
+admin_username = "admin"
+admin_password = "Admin123!"
+
+[db]
+host = "listmonk-db"
+port = 5432
+user = "listmonk"
+password = "listmonk"
+database = "listmonk"
+ssl_mode = "disable"

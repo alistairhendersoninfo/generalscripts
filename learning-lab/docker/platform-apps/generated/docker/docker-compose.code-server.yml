@@ -1,0 +1,17 @@
+# Notes: Mount workspace volume and set PASSWORD.
+services:
+  code-server:
+    image: codercom/code-server:4.91.1
+    container_name: code-server
+    restart: unless-stopped
+    ports:
+      - "8081:8081"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

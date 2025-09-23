@@ -1,0 +1,12 @@
+services:
+  hop:
+    image: apache/hop-web:2.8.0
+    environment:
+      HOP_SERVER_USER: admin
+      HOP_SERVER_PASSWORD: admin
+    ports:
+      - 8081:8081
+    volumes:
+      - ./pipelines:/files/pipelines
+      - ../../datasets/data/worldbank:/files/data/worldbank:ro
+      - ../../datasets/data/logs:/files/data/logs:ro

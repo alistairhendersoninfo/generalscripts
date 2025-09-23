@@ -1,0 +1,17 @@
+# Notes: Requires Postgres database.
+services:
+  odoo-community:
+    image: odoo:17.0
+    container_name: odoo-community
+    restart: unless-stopped
+    ports:
+      - "8069:8069"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

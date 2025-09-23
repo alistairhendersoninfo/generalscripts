@@ -1,0 +1,17 @@
+# Notes: Supports Postgres or MySQL; Postgres recommended.
+services:
+  photoview:
+    image: viktorstrate/photoview:latest
+    container_name: photoview
+    restart: unless-stopped
+    ports:
+      - "3013:3013"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

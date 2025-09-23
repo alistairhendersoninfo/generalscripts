@@ -1,0 +1,4 @@
+image: deluan/navidrome:0.50.2
+service:
+  port: 4533
+resources: {}

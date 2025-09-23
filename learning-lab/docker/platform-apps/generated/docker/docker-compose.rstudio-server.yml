@@ -1,0 +1,17 @@
+# Notes: Set PASSWORD and mount /home/rstudio.
+services:
+  rstudio-server:
+    image: rocker/rstudio:4.3.3
+    container_name: rstudio-server
+    restart: unless-stopped
+    ports:
+      - "8787:8787"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

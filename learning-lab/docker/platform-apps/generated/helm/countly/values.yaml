@@ -1,0 +1,4 @@
+image: countly/countly-server:22.06
+service:
+  port: 80
+resources: {}

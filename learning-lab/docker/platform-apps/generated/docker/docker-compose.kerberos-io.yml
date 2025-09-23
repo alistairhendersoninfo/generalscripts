@@ -1,0 +1,17 @@
+# Notes: Mount recordings volume for footage.
+services:
+  kerberos-io:
+    image: kerberos/kerberos:3.5.0
+    container_name: kerberos-io
+    restart: unless-stopped
+    ports:
+      - "8081:8081"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

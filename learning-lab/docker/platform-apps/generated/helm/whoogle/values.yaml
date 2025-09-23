@@ -1,0 +1,4 @@
+image: benbusby/whoogle-search:latest
+service:
+  port: 5000
+resources: {}

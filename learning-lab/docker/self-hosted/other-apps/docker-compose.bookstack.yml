@@ -1,0 +1,36 @@
+version: "3.9"
+
+services:
+  bookstack:
+    image: ghcr.io/linuxserver/bookstack:23.10
+    restart: unless-stopped
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - APP_URL=http://localhost:80828
+      - DB_HOST=bookstack-db
+      - DB_PORT=3306
+      - DB_DATABASE=bookstack
+      - DB_USERNAME=bookstack
+      - DB_PASSWORD=bookstack
+    depends_on:
+      - bookstack-db
+    ports:
+      - "80828:80"
+    volumes:
+      - bookstack-config:/config
+
+  bookstack-db:
+    image: mariadb:10.6
+    restart: unless-stopped
+    environment:
+      - MYSQL_ROOT_PASSWORD=bookstack
+      - MYSQL_DATABASE=bookstack
+      - MYSQL_USER=bookstack
+      - MYSQL_PASSWORD=bookstack
+    volumes:
+      - bookstack-db:/var/lib/mysql
+
+volumes:
+  bookstack-config:
+  bookstack-db:

@@ -1,0 +1,17 @@
+# Notes: Supports SQLite, Postgres, or MySQL; Postgres recommended.
+services:
+  directus:
+    image: directus/directus:10.8.3
+    container_name: directus
+    restart: unless-stopped
+    ports:
+      - "8055:8055"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

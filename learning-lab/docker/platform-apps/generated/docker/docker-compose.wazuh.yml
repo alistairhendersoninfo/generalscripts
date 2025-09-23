@@ -1,0 +1,17 @@
+# Notes: Bundle manager, filebeat, and OpenSearch containers for full stack.
+services:
+  wazuh:
+    image: wazuh/wazuh-dashboard:4.7.2
+    container_name: wazuh
+    restart: unless-stopped
+    ports:
+      - "5602:5602"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

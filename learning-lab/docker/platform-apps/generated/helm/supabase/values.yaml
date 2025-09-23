@@ -1,0 +1,4 @@
+image: supabase/postgres:15.1.0.68
+service:
+  port: 5433
+resources: {}

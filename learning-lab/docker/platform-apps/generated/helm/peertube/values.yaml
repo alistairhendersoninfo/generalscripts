@@ -1,0 +1,4 @@
+image: chocobozzz/peertube:6.1.0
+service:
+  port: 9000
+resources: {}

@@ -1,0 +1,17 @@
+# Notes: Stateless wiki server; persist by mounting volume.
+services:
+  tiddlywiki:
+    image: tiddlywiki:5.3.2
+    container_name: tiddlywiki
+    restart: unless-stopped
+    ports:
+      - "8089:8089"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

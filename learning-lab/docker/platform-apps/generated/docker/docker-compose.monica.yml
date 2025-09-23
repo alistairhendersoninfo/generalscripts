@@ -1,0 +1,17 @@
+# Notes: Configure Postgres connection.
+services:
+  monica:
+    image: monica:latest
+    container_name: monica
+    restart: unless-stopped
+    ports:
+      - "8094:8094"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

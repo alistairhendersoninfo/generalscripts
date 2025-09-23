@@ -1,0 +1,17 @@
+# Notes: Requires Postgres, Elasticsearch/OpenSearch, and optional Redis.
+services:
+  danswer:
+    image: danny-avila/danswer:latest
+    container_name: danswer
+    restart: unless-stopped
+    ports:
+      - "8083:8083"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

@@ -1,0 +1,17 @@
+# Notes: Configure DATABASE_URL to Postgres.
+services:
+  keystonejs:
+    image: ghcr.io/keystonejs/keystone:6.0.2
+    container_name: keystonejs
+    restart: unless-stopped
+    ports:
+      - "3002:3002"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

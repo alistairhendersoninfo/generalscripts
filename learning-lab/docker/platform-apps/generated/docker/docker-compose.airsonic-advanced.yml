@@ -1,0 +1,17 @@
+# Notes: Mount config, podcasts, and media directories.
+services:
+  airsonic-advanced:
+    image: airsonicadvanced/airsonic-advanced:11.0.0
+    container_name: airsonic-advanced
+    restart: unless-stopped
+    ports:
+      - "4040:4040"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

@@ -1,0 +1,4 @@
+image: nodebb/docker:latest
+service:
+  port: 4567
+resources: {}

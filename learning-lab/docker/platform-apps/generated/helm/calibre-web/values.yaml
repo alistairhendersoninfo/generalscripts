@@ -1,0 +1,4 @@
+image: linuxserver/calibre-web:latest
+service:
+  port: 8083
+resources: {}

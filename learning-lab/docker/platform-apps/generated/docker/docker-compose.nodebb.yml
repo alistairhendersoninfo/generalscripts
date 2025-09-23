@@ -1,0 +1,17 @@
+# Notes: Requires MongoDB and Redis.
+services:
+  nodebb:
+    image: nodebb/docker:latest
+    container_name: nodebb
+    restart: unless-stopped
+    ports:
+      - "4567:4567"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

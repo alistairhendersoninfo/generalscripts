@@ -1,0 +1,17 @@
+# Notes: Requires Postgres and Redis.
+services:
+  authentik:
+    image: ghcr.io/goauthentik/server:2024.3.1
+    container_name: authentik
+    restart: unless-stopped
+    ports:
+      - "9000:9000"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

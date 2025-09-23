@@ -1,0 +1,4 @@
+image: milesmcc/shynet:latest
+service:
+  port: 8082
+resources: {}

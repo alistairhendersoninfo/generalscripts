@@ -1,0 +1,17 @@
+# Notes: Requires Postgres and Redis.
+services:
+  funkwhale:
+    image: thetarkus/funkwhale:1.4.0
+    container_name: funkwhale
+    restart: unless-stopped
+    ports:
+      - "8536:8536"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

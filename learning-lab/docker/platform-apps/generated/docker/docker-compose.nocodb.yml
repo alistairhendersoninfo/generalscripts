@@ -1,0 +1,17 @@
+# Notes: Works with Postgres, MySQL, or SQL Server; Postgres recommended.
+services:
+  nocodb:
+    image: nocodb/nocodb:0.204.7
+    container_name: nocodb
+    restart: unless-stopped
+    ports:
+      - "8084:8084"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

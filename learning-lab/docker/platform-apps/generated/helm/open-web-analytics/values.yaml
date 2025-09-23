@@ -1,0 +1,4 @@
+image: openwebanalytics/owa:1.7.6
+service:
+  port: 8081
+resources: {}

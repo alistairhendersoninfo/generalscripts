@@ -1,0 +1,4 @@
+image: searxng/searxng:2024.04.22-16c45362
+service:
+  port: 8080
+resources: {}

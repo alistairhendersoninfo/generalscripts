@@ -1,0 +1,17 @@
+# Notes: Requires MariaDB; mount config and gallery volumes.
+services:
+  piwigo:
+    image: linuxserver/piwigo:latest
+    container_name: piwigo
+    restart: unless-stopped
+    ports:
+      - "3011:3011"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

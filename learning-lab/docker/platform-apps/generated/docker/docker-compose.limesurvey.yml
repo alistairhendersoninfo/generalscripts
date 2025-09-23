@@ -1,0 +1,17 @@
+# Notes: Requires MariaDB or Postgres database.
+services:
+  limesurvey:
+    image: lscr.io/linuxserver/limesurvey:6.5.10
+    container_name: limesurvey
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

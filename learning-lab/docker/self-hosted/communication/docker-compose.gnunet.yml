@@ -1,0 +1,17 @@
+version: "3.9"
+
+services:
+  gnunet:
+    image: gnunet/gnunet:0.20.1
+    restart: unless-stopped
+    ports:
+      - "7776:7776"
+      - "2086:2086"
+    command: gnunet-arm -s && tail -f /var/log/gnunet.log
+    volumes:
+      - gnunet-data:/var/lib/gnunet
+      - gnunet-log:/var/log
+
+volumes:
+  gnunet-data:
+  gnunet-log:

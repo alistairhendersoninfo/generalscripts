@@ -1,0 +1,18 @@
+postgres:
+  image: postgres:16-alpine
+  username: laravel
+  password: laravel
+  database: sales
+clickhouse:
+  image: clickhouse/clickhouse-server:23.8
+  username: analytics
+  password: analytics
+  database: analytics
+redis:
+  image: redis:7-alpine
+minio:
+  image: minio/minio:RELEASE.2024-03-30T00-08-50Z
+  rootUser: minio
+  rootPassword: minio123
+nginx:
+  image: learning-lab/charts-master:latest

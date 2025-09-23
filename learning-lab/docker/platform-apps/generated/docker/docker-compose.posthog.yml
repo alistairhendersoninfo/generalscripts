@@ -1,0 +1,17 @@
+# Notes: Depends on Postgres, Redis, ClickHouse, Kafka, and Zookeeper.
+services:
+  posthog:
+    image: posthog/posthog:latest
+    container_name: posthog
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

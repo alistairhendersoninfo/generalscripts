@@ -1,0 +1,4 @@
+image: rocker/rstudio:4.3.3
+service:
+  port: 8787
+resources: {}

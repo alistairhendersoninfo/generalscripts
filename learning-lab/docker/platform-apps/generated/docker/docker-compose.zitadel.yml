@@ -1,0 +1,17 @@
+# Notes: Configure Postgres connection string.
+services:
+  zitadel:
+    image: ghcr.io/zitadel/zitadel:2.48.0
+    container_name: zitadel
+    restart: unless-stopped
+    ports:
+      - "8081:8081"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

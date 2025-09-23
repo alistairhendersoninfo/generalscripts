@@ -1,0 +1,4 @@
+image: hoppscotch/hoppscotch:latest
+service:
+  port: 3004
+resources: {}

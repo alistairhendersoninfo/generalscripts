@@ -1,0 +1,17 @@
+# Notes: Needs Postgres storage and Redis session backend.
+services:
+  authelia:
+    image: authelia/authelia:4.38.8
+    container_name: authelia
+    restart: unless-stopped
+    ports:
+      - "9091:9091"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

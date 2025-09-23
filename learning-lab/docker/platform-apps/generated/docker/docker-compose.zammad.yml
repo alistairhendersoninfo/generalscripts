@@ -1,0 +1,17 @@
+# Notes: Requires Postgres, Redis, and Elasticsearch.
+services:
+  zammad:
+    image: zammad/zammad:6.3.0
+    container_name: zammad
+    restart: unless-stopped
+    ports:
+      - "8085:8085"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

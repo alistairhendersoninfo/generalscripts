@@ -1,0 +1,4 @@
+image: portainer/portainer-ce:2.19.4
+service:
+  port: 9443
+resources: {}

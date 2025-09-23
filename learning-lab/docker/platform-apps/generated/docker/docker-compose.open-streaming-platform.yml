@@ -1,0 +1,17 @@
+# Notes: Requires MariaDB.
+services:
+  open-streaming-platform:
+    image: opensourcepos/osp:0.9.4
+    container_name: open-streaming-platform
+    restart: unless-stopped
+    ports:
+      - "8097:8097"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

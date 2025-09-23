@@ -1,0 +1,4 @@
+image: writeas/writefreely:latest
+service:
+  port: 8105
+resources: {}

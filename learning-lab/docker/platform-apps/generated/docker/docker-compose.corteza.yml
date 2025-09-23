@@ -1,0 +1,17 @@
+# Notes: Requires Postgres and Redis.
+services:
+  corteza:
+    image: cortezaproject/corteza:2023.9
+    container_name: corteza
+    restart: unless-stopped
+    ports:
+      - "18080:18080"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

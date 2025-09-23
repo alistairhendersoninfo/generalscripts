@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Chartist GDP</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chartist@0.11.4/dist/chartist.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chartist@0.11.4/dist/chartist.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.1/dist/tailwind.min.css" />
+  <style>
+    body { background: #0f172a; color: #e2e8f0; }
+    .ct-series-a .ct-line { stroke: #38bdf8; }
+    .ct-series-a .ct-point { stroke: #38bdf8; }
+    .ct-label { color: #cbd5f5; }
+  </style>
+</head>
+<body>
+  <div class="max-w-4xl mx-auto py-10">
+    <h1 class="text-3xl font-semibold mb-4">GDP per capita (Chartist.js)</h1>
+    <div class="ct-chart ct-major-twelfth"></div>
+  </div>
+  <script>
+    async function load() {
+      const res = await fetch('/api/worldbank/gdp_per_capita?country=USA&limit=30');
+      const data = await res.json();
+      new Chartist.Line('.ct-chart', {
+        labels: data.series.map(p => p.period),
+        series: [data.series.map(p => p.value)]
+      }, {
+        fullWidth: true,
+        chartPadding: { right: 40 }
+      });
+    }
+    load();
+  </script>
+</body>
+</html>

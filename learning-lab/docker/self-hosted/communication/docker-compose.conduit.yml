@@ -1,0 +1,18 @@
+version: "3.9"
+
+services:
+  conduit:
+    image: matrixconduit/matrix-conduit:v0.6.0
+    restart: unless-stopped
+    environment:
+      - CONDUIT_SERVER_NAME=conduit.localhost
+      - CONDUIT_DATABASE_PATH=/var/lib/conduit/conduit.db
+      - CONDUIT_PORT=6167
+      - CONDUIT_ALLOW_REGISTRATION=true
+    ports:
+      - "6167:6167"
+    volumes:
+      - conduit-data:/var/lib/conduit
+
+volumes:
+  conduit-data:

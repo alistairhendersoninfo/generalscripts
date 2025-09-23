@@ -1,0 +1,4 @@
+image: directus/directus:10.8.3
+service:
+  port: 8055
+resources: {}

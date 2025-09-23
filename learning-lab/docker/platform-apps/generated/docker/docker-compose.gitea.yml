@@ -1,0 +1,18 @@
+# Notes: Supports Postgres, MariaDB, or SQLite; Postgres recommended.
+services:
+  gitea:
+    image: gitea/gitea:1.21.6
+    container_name: gitea
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+      - "2222:2222"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

@@ -1,0 +1,4 @@
+image: sonatype/nexus3:3.68.1
+service:
+  port: 8082
+resources: {}

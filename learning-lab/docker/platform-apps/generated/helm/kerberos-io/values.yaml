@@ -1,0 +1,4 @@
+image: kerberos/kerberos:3.5.0
+service:
+  port: 8081
+resources: {}

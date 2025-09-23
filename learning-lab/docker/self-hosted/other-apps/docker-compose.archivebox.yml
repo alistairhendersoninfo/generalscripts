@@ -1,0 +1,19 @@
+version: "3.9"
+
+services:
+  archivebox:
+    image: archivebox/archivebox:0.7
+    restart: unless-stopped
+    command: server 0.0.0.0:8000
+    environment:
+      - ALLOWED_HOSTS=* 
+      - USE_COLOR=True
+      - ADMIN_USERNAME=admin
+      - ADMIN_PASSWORD=Admin123!
+    ports:
+      - "80830:8000"
+    volumes:
+      - archivebox-data:/data
+
+volumes:
+  archivebox-data:

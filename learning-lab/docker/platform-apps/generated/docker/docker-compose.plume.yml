@@ -1,0 +1,17 @@
+# Notes: Uses Postgres database.
+services:
+  plume:
+    image: plumeorg/plume:0.7.2
+    container_name: plume
+    restart: unless-stopped
+    ports:
+      - "8106:8106"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab

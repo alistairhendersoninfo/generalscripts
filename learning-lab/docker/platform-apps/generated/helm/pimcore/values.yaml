@@ -1,0 +1,4 @@
+image: pimcore/pimcore:11.1.0-apache
+service:
+  port: 3016
+resources: {}

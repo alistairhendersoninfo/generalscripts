@@ -1,0 +1,17 @@
+# Notes: Requires Postgres and Redis.
+services:
+  glitchtip:
+    image: glitchtip/glitchtip:3.2.2
+    container_name: glitchtip
+    restart: unless-stopped
+    ports:
+      - "9000:9000"
+    environment:
+      # TODO: define environment variables
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
+    name: learning-lab_lab
